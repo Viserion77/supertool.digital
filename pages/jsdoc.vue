@@ -26,7 +26,20 @@ const clearInput = () => {
 };
 
 const generateJSDoc = () => {
-  jsdocOutput.value = 'WIP';
+  try {
+    const obj = JSON.parse(objectInput.value);
+    let jsdoc = `/**\n * @typedef {Object} GeneratedType\n`;
+
+    for (const [key, value] of Object.entries(obj)) {
+      const type = typeof value;
+      jsdoc += ` * @property {${type}} ${key}\n`;
+    }
+
+    jsdoc += ` */`;
+    jsdocOutput.value = jsdoc;
+  } catch (e) {
+    jsdocOutput.value = 'Invalid JSON input';
+  }
 };
 
 watch(objectInput, generateJSDoc);
