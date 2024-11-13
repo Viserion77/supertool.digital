@@ -1,3 +1,7 @@
 {
-  "conventionalCommits.scopes": ["DX"]
+  "conventionalCommits.scopes": [
+    "DX",
+    "vercel",
+    "vscode"
+  ]
 }
