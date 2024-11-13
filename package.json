@@ -12,6 +12,7 @@
     "lint:fix": "prettier --write ."
   },
   "dependencies": {
+    "@vercel/speed-insights": "^1.1.0",
     "nuxt": "^3.14.159",
     "vue": "latest",
     "vue-router": "latest"
