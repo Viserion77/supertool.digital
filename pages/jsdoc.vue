@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <textarea v-model="objectInput" placeholder="Enter object here" class="half-screen"></textarea>
     <textarea v-model="jsdocOutput" placeholder="Generated JSDoc output" class="half-screen"></textarea>
     <button @click="copyOutput" class="big-button">
@@ -33,14 +33,22 @@ watch(objectInput, generateJSDoc);
 </script>
 
 <style>
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .half-screen {
   width: 50%;
   height: 200px;
+  margin-bottom: 20px;
 }
 
 .big-button {
   font-size: 1.5em;
   padding: 10px 20px;
+  margin: 10px;
 }
 
 .icon-copy::before {
