@@ -60,10 +60,23 @@ const generateJSDoc = () => {
     const obj = JSON.parse(objectInput.value);
     let jsdoc = `/**\n * @typedef {Object} GeneratedType\n`;
 
-    for (const [key, value] of Object.entries(obj)) {
-      const type = typeof value;
-      jsdoc += ` * @property {${type}} ${key}\n`;
-    }
+    const processObject = (obj: Record<string, any>, prefix = "") => {
+      for (const [key, value] of Object.entries(obj)) {
+        let type: string = typeof value;
+        if (Array.isArray(value)) {
+          type = "Array";
+          if (value.length > 0) {
+            type += `<${typeof value[0]}>`;
+          }
+        } else if (type === "object" && value !== null) {
+          type = "Object";
+          processObject(value, `${prefix}${key}.`);
+        }
+        jsdoc += ` * @property {${type}} ${prefix}${key}\n`;
+      }
+    };
+
+    processObject(obj);
 
     jsdoc += ` */`;
     jsdocOutput.value = jsdoc;
