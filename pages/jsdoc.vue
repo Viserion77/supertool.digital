@@ -65,12 +65,30 @@ const generateJSDoc = () => {
         let type: string = typeof value;
         if (Array.isArray(value)) {
           type = "Array";
-          if (value.length > 0) {
+          if (value.length === 1) {
             type += `<${typeof value[0]}>`;
           }
+          if (value.length > 1) {
+            type += `<`;
+            const types = new Set<string>();
+            for (let i = 0; i < value.length; i++) {
+              types.add(typeof value[i]);
+            }
+            type += Array.from(types).join(" | ");
+            type += ">";
+          }
         } else if (type === "object" && value !== null) {
-          type = "Object";
-          processObject(value, `${prefix}${key}.`);
+          if (Object.keys(value).length > 3) {
+            const typeName = `${prefix}${key.charAt(0).toUpperCase() + key.slice(1)}Type`;
+            const bkp = jsdoc;
+            jsdoc = `/**\n * @typedef {Object} ${typeName}\n`;
+            processObject(value, "");
+            jsdoc += ` */\n${bkp}`;
+
+            type = typeName;
+          } else {
+            processObject(value, `${prefix}${key}.`);
+          }
         }
         jsdoc += ` * @property {${type}} ${prefix}${key}\n`;
       }
