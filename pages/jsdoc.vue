@@ -57,29 +57,63 @@ const clearInput = () => {
 
 const generateJSDoc = () => {
   try {
-    const obj = JSON.parse(objectInput.value);
+    const obj = eval(`(${objectInput.value})`);
     let jsdoc = `/**\n * @typedef {Object} GeneratedType\n`;
 
     const processObject = (obj: Record<string, any>, prefix = "") => {
+      const seenObjects = new Map<string, string>();
+
+      const getObjectTypeName = (obj: Record<string, any>): string => {
+        const objString = JSON.stringify(obj);
+        if (seenObjects.has(objString)) {
+          return seenObjects.get(objString) ?? "";
+        }
+        const typeName = `Type${seenObjects.size + 1}`;
+        seenObjects.set(objString, typeName);
+        return typeName;
+      };
+
       for (const [key, value] of Object.entries(obj)) {
         let type: string = typeof value;
         if (Array.isArray(value)) {
           type = "Array";
           if (value.length === 1) {
-            type += `<${typeof value[0]}>`;
-          }
-          if (value.length > 1) {
+            const newType = typeof value[0];
+            if (newType === "object" && value[0] !== null) {
+              const typeName = getObjectTypeName(value[0]);
+              const bkp = jsdoc;
+              jsdoc = `/**\n * @typedef {Object} ${typeName}\n`;
+              processObject(value[0], "");
+              jsdoc += ` */\n${bkp}`;
+              type += `<${typeName}>`;
+            } else {
+              type += `<${newType}>`;
+            }
+          } else if (value.length > 1) {
             type += `<`;
             const types = new Set<string>();
             for (let i = 0; i < value.length; i++) {
-              types.add(typeof value[i]);
+              const newType = typeof value[i];
+              if (newType === "object" && value[i] !== null) {
+                const typeName = getObjectTypeName(value[i]);
+                if (types.has(typeName)) {
+                  continue;
+                }
+                const bkp = jsdoc;
+                jsdoc = `/**\n * @typedef {Object} ${typeName}\n`;
+                processObject(value[i], "");
+                jsdoc += ` */\n${bkp}`;
+                types.add(typeName);
+              } else {
+                types.add(newType);
+              }
             }
             type += Array.from(types).join(" | ");
             type += ">";
           }
         } else if (type === "object" && value !== null) {
           if (Object.keys(value).length > 3) {
-            const typeName = `${prefix}${key.charAt(0).toUpperCase() + key.slice(1)}Type`;
+            const typeName = getObjectTypeName(value);
             const bkp = jsdoc;
             jsdoc = `/**\n * @typedef {Object} ${typeName}\n`;
             processObject(value, "");
@@ -99,7 +133,7 @@ const generateJSDoc = () => {
     jsdoc += ` */`;
     jsdocOutput.value = jsdoc;
   } catch (e) {
-    jsdocOutput.value = "Invalid JSON input";
+    jsdocOutput.value = "Invalid input";
   }
 };
 
