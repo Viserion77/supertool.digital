@@ -21,7 +21,7 @@ export default defineEventHandler(async (event) => {
       database: {
         version: databaseVersion,
         max_connections: parseInt(maxConnections),
-        current_connections: currentConnections,
+        opened_connections: currentConnections,
       },
     },
   };
