@@ -1,4 +1,4 @@
-import database from "~/infra/database";
+import database from "~/resources/database";
 
 export default defineEventHandler(async (event) => {
   const now = new Date().toISOString();
