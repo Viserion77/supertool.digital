@@ -1,3 +1,13 @@
 {
-  "conventionalCommits.scopes": ["DX", "resources", "vscode", "prettier", "test"]
+  "conventionalCommits.scopes": [
+    "DX",
+    "resources",
+    "vscode",
+    "prettier",
+    "test"
+  ],
+  "cSpell.words": [
+    "nuxt",
+    "vercel"
+  ]
 }
