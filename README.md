@@ -1,5 +1,8 @@
 # supertool.digital
 
+## Status page
+[https://stats.uptimerobot.com/m4Zb5NHGti](https://stats.uptimerobot.com/m4Zb5NHGti)
+
 ## Promote the JSDoc Page
 
 The JSDoc Generator page on SuperTool is a powerful tool that helps you generate JSDoc comments for your JavaScript objects. It is now optimized for SEO and user experience, making it easier to find and use.
