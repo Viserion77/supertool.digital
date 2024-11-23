@@ -5,6 +5,7 @@
     "streetsidesoftware.code-spell-checker",
     "vivaxy.vscode-conventional-commits",
     "editorconfig.editorconfig",
-    "esbenp.prettier-vscode"
+    "esbenp.prettier-vscode",
+    "vue.volar"
   ]
 }
