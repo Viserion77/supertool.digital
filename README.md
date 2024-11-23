@@ -1,6 +1,7 @@
 # supertool.digital
 
 ## Status page
+
 [https://stats.uptimerobot.com/m4Zb5NHGti](https://stats.uptimerobot.com/m4Zb5NHGti)
 
 ## Promote the JSDoc Page
