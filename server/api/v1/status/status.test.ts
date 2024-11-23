@@ -1,7 +1,7 @@
 // @vitest-environment nuxt
 import { describe, test, expect } from "vitest";
 
-describe("GET /api/v1/status", () => {
+describe.sequential("GET /api/v1/status", () => {
   describe("Anonymous user", () => {
     test("Retrieving current system status", async () => {
       const response = await fetch("http://localhost:3000/api/v1/status");
