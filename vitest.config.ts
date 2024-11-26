@@ -1,9 +1,9 @@
 // vitest.config.ts
 import { fileURLToPath } from "node:url";
 import { defineVitestConfig } from "@nuxt/test-utils/config";
-import { config as dotenvConfig } from 'dotenv';
+import { config as dotenvConfig } from "dotenv";
 
-dotenvConfig()
+dotenvConfig();
 
 export default defineVitestConfig({
   test: {
