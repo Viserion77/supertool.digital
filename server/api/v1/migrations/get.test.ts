@@ -1,8 +1,8 @@
 import { test, expect, beforeAll } from "vitest";
 import database from "~/resources/database";
 
-async function cleanDatabase(){
-database.query("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");
+async function cleanDatabase() {
+  await database.query("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");
 }
 
 beforeAll(cleanDatabase);

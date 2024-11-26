@@ -15,11 +15,14 @@ async function createClient() {
   return client;
 }
 
-const clientPromise = createClient();
+const client = createClient();
 
 async function query(queryObject: string | { text: string; values: any[] }) {
-  const client = await clientPromise;
-  return client.query(queryObject);
+  const connection = await client;
+  return connection.query(queryObject);
 }
 
-export default { query };
+export default {
+  query,
+  client,
+};
