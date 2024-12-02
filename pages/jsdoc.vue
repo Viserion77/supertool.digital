@@ -42,6 +42,9 @@ useHead({
       content: "JSDoc, JavaScript, documentation, generator, tool",
     },
   ],
+  htmlAttrs: {
+    lang: "en",
+  },
 });
 
 const objectInput = ref("");
