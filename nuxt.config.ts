@@ -5,15 +5,8 @@ export default defineNuxtConfig({
   pages: true,
   modules: ["@nuxt/test-utils/module"],
   ignore: ["**/*.test.ts"],
-  nitro: {
-    vercel: {
-      functions: {
-        migrations: {
-          handler: "~/server/api/v1/migrations/index.ts",
-          events: ["http"],
-        },
-      },
-    }
-  }
-
+  routeRules: {
+    '/': { prerender: true },
+    '/jsdoc': { prerender: true },
+  },
 });
