@@ -1,7 +1,11 @@
 import pg from "pg";
+import { config as dotenvConfig } from "dotenv";
+
 const { Client } = pg;
 
 async function createClient() {
+  if (!process.env.POSTGRES_HOST) dotenvConfig(); // TODO refatorar
+
   const client = new Client({
     host: process.env.POSTGRES_HOST,
     port: Number(process.env.POSTGRES_PORT ?? 5432),

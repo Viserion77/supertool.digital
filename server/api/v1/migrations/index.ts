@@ -1,17 +1,12 @@
-import migrationRunner from "node-pg-migrate";
-import { RunnerOptionConfig } from "node-pg-migrate/dist/types";
-import { join } from "node:path";
-import { Client } from "pg";
 import database from "~/resources/database";
+import { migrationRunner } from "~/resources/migrationRunner";
 
 export default defineEventHandler(async (event) => {
   const client = await database.client;
   const requestMethod = event.node.req.method;
-  const configuration: RunnerOptionConfig & { dbClient: Client } = {
+  const configuration = {
     dbClient: client,
     dryRun: true,
-    dir: join("resources", "migrations"),
-    direction: "up",
     migrationsTable: "pgmigrations",
   };
 

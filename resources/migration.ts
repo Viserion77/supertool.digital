@@ -1,9 +1,6 @@
 import fs from "node:fs/promises";
 import db from "./database";
-import { config as dotenvConfig } from "dotenv";
-
-dotenvConfig();
-const MIGRATIONS_TABLE = "own_migrations_script";
+import { migrationRunner } from "./migrationRunner";
 
 /**
  * Função chamada pelo terminal para criar um novo arquivo de migração e editar o arquivo de migrações para executar 'stepper.ts'
@@ -43,58 +40,9 @@ export function up${now}() {
 if (process.argv[2] === "create") {
   const name = process.argv[3];
   await create(name);
-}
-
-async function validateMigrationTable() {
-  const query = `
-    CREATE TABLE IF NOT EXISTS ${MIGRATIONS_TABLE} (
-      id SERIAL PRIMARY KEY,
-      name VARCHAR(255) NOT NULL
-    )
-  `;
-  await db.query(query);
-}
-
-/**
- * Função chamada pelo terminal para executar a migração de fato
- * @example
- * script: migration:up: 'node resources/migration.ts up'
- * "npm run migration:up"
- */
-export async function up(closeConnection = false) {
-  const migrations: {
-    [migration: string]: () => string;
-  } = await import("./migrations");
-  const client = await db.client;
-
-  await validateMigrationTable();
-  const currentMigration = await db.query(
-    `SELECT * FROM ${MIGRATIONS_TABLE} ORDER BY id DESC LIMIT 1`,
-  );
-  let lastMigration = null;
-  if (currentMigration.rows.length) {
-    lastMigration = currentMigration.rows[0].name;
-  }
-
-  const migrationFiles = Object.keys(migrations).sort();
-  for (const migration of migrationFiles) {
-    if (migration <= lastMigration) {
-      continue;
-    }
-
-    const query = migrations[migration]();
-    await db.query(query);
-    await db.query(
-      `INSERT INTO ${MIGRATIONS_TABLE} (name) VALUES ('${migration}')`,
-    );
-    console.log(`Migração executada: ${migration}`);
-  }
-
-  if (closeConnection) {
-    await client.end();
-  }
+  await (await db.client).end(); // todo: refatorar
 }
 
 if (process.argv[2] === "up") {
-  await up(true);
+  await migrationRunner({ closeConnection: true });
 }
