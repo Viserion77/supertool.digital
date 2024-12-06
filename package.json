@@ -13,14 +13,13 @@
     "services:down": "docker compose -f resources/compose.yaml down",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
-    "migration:create": "node-pg-migrate -m resources/migrations create",
-    "migration:up": "node-pg-migrate -m resources/migrations up",
+    "migration:create": "tsx resources/migration create",
+    "migration:up": "tsx resources/migration up",
     "test": "vitest"
   },
   "dependencies": {
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
-    "node-pg-migrate": "^7.8.0",
     "nuxt": "^3.14.159",
     "pg": "8.11.0",
     "vue": "latest",
@@ -30,9 +29,12 @@
     "@nuxt/test-utils": "^3.14.4",
     "@types/pg": "^8.11.10",
     "@vue/test-utils": "^2.4.6",
+    "dotenv": "^16.4.5",
+    "dotenv-expand": "^11.0.6",
     "happy-dom": "^15.11.6",
     "playwright-core": "^1.48.2",
     "prettier": "^3.3.3",
+    "tsx": "^4.19.2",
     "vitest": "^2.1.5"
   }
 }
