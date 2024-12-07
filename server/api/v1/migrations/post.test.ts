@@ -1,13 +1,13 @@
 import { test, expect, beforeAll } from "vitest";
 import database from "~/resources/database";
+import orchestrator from "~/tests/orchestrator";
 
-async function cleanDatabase() {
+beforeAll(async () => {
+  await orchestrator.waitForAllServices();
   await database.query("DROP SCHEMA public CASCADE; CREATE SCHEMA public;");
-}
+});
 
-beforeAll(cleanDatabase);
-
-test.sequential("POST /api/v1/migrations", async () => {
+test("POST /api/v1/migrations", async () => {
   const response1 = await fetch("http://localhost:3000/api/v1/migrations", {
     method: "POST",
   });
@@ -21,6 +21,7 @@ test.sequential("POST /api/v1/migrations", async () => {
   const migrationsResponse = await database.query(
     "SELECT count(*)::int FROM pgmigrations",
   );
+  await (await database.client).end();
   expect(migrationsResponse.rows[0].count).toBeGreaterThan(0);
 
   const response2 = await fetch("http://localhost:3000/api/v1/migrations", {
