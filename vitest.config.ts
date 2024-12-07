@@ -1,5 +1,5 @@
 // vitest.config.ts
-import { fileURLToPath } from "node:url";
+
 import { defineVitestConfig } from "@nuxt/test-utils/config";
 import { config as dotenvConfig } from "dotenv";
 
@@ -8,6 +8,8 @@ dotenvConfig();
 export default defineVitestConfig({
   test: {
     environment: "nuxt",
+    fileParallelism: false,
+    testTimeout: 1000 * 60,
     // you can optionally set Nuxt-specific environment options
     // environmentOptions: {
     //   nuxt: {
