@@ -1,7 +1,10 @@
 // @vitest-environment nuxt
-import { describe, test, expect } from "vitest";
+import { describe, expect, beforeAll, test } from "vitest";
+import orchestrator from "~/tests/orchestrator";
 
-describe.sequential("GET /api/v1/status", () => {
+beforeAll(orchestrator.waitForAllServices);
+
+describe("GET /api/v1/status", () => {
   describe("Anonymous user", () => {
     test("Retrieving current system status", async () => {
       const response = await fetch("http://localhost:3000/api/v1/status");
