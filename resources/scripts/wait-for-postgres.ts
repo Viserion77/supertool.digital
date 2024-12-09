@@ -4,7 +4,6 @@ function checkPostgres() {
   function handleReturn(
     error: import("child_process").ExecException | null,
     stdout: string,
-    stderr: string,
   ): void {
     if (stdout.search("accepting connections") === -1) {
       process.stdout.write(".");
