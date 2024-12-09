@@ -21,7 +21,7 @@ async function createClient() {
 
 const client = createClient();
 
-async function query(queryObject: string | { text: string; values: any[] }) {
+async function query(queryObject: string | { text: string; values: string[] }) {
   const connection = await client;
   return connection.query(queryObject);
 }

@@ -10,17 +10,17 @@
       v-model="objectInput"
       placeholder="Enter object here"
       class="half-screen"
-    ></textarea>
+    />
     <textarea
       v-model="jsdocOutput"
       placeholder="Generated JSDoc output"
       class="half-screen"
-    ></textarea>
-    <button @click="clearInput" class="big-button">
-      <i class="icon-clear"></i> Clear Input
+    />
+    <button class="big-button" @click="clearInput">
+      <i class="icon-clear" /> Clear Input
     </button>
-    <button @click="copyOutput" class="big-button">
-      <i class="icon-copy"></i> Copy Output
+    <button class="big-button" @click="copyOutput">
+      <i class="icon-copy" /> Copy Output
     </button>
   </div>
 </template>
@@ -63,10 +63,10 @@ const generateJSDoc = () => {
     const obj = eval(`(${objectInput.value})`);
     let jsdoc = `/**\n * @typedef {Object} GeneratedType\n`;
 
-    const processObject = (obj: Record<string, any>, prefix = "") => {
+    const processObject = (obj: Record<string, string>, prefix = "") => {
       const seenObjects = new Map<string, string>();
 
-      const getObjectTypeName = (obj: Record<string, any>): string => {
+      const getObjectTypeName = (obj: Record<string, string>): string => {
         const objString = JSON.stringify(obj);
         if (seenObjects.has(objString)) {
           return seenObjects.get(objString) ?? "";
@@ -135,7 +135,7 @@ const generateJSDoc = () => {
 
     jsdoc += ` */`;
     jsdocOutput.value = jsdoc;
-  } catch (e) {
+  } catch {
     jsdocOutput.value = "Invalid input";
   }
 };

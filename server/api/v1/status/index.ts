@@ -1,6 +1,6 @@
 import database from "~/resources/database";
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
   const now = new Date().toISOString();
 
   const serverVersionResult = await database.query("SHOW server_version");
@@ -11,7 +11,7 @@ export default defineEventHandler(async (event) => {
 
   const currentConnectionsResult = await database.query({
     text: "SELECT COUNT(*)::int FROM pg_stat_activity WHERE datname = $1;",
-    values: [process.env.POSTGRES_DATABASE],
+    values: [process.env.POSTGRES_DATABASE ?? ""],
   });
   const currentConnections = currentConnectionsResult.rows[0].count;
 
