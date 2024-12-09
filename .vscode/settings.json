@@ -6,10 +6,6 @@
     "prettier",
     "test"
   ],
-  "cSpell.words": [
-    "nuxt",
-    "supertool",
-    "vercel"
-  ],
+  "cSpell.words": ["nuxt", "supertool", "vercel"],
   "eslint.useFlatConfig": true
 }
