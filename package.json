@@ -19,7 +19,8 @@
     "migration:create": "tsx resources/migration create",
     "migration:up": "tsx resources/migration up",
     "test": "npm run services:up && concurrently -n nuxt,vitest --hide nuxt -k -s command-vitest \"nuxt dev\" \"vitest --run\"",
-    "test:watch": "vitest"
+    "test:watch": "vitest",
+    "prepare": "husky"
   },
   "dependencies": {
     "@nuxt/eslint": "^0.7.2",
@@ -42,6 +43,7 @@
     "dotenv": "^16.4.5",
     "dotenv-expand": "^11.0.6",
     "happy-dom": "^15.11.6",
+    "husky": "^9.1.7",
     "playwright-core": "^1.48.2",
     "prettier": "^3.3.3",
     "tsx": "^4.19.2",
