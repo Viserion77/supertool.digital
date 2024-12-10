@@ -32,6 +32,8 @@
     "vue-router": "latest"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.6.0",
+    "@commitlint/config-conventional": "^19.6.0",
     "@nuxt/test-utils": "^3.14.4",
     "@types/async-retry": "^1.4.9",
     "@types/pg": "^8.11.10",
