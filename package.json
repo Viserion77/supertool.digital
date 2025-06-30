@@ -1,5 +1,6 @@
 {
   "name": "supertool.digital",
+  "description": "A nice hub of super tools",
   "private": true,
   "type": "module",
   "scripts": {
