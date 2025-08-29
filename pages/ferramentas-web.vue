@@ -1,7 +1,9 @@
 <template>
   <section class="container" aria-labelledby="webtools-title">
     <h1 id="webtools-title">Ferramentas Web</h1>
-    <p class="helper">Useful everyday utilities that run fully in your browser.</p>
+    <p class="helper">
+      Useful everyday utilities that run fully in your browser.
+    </p>
     <div class="grid mt-16">
       <NuxtLink class="card" to="/jwt-analyzer">
         <h3>JWT Token Analyzer</h3>
@@ -19,5 +21,11 @@
   </section>
 </template>
 <script setup lang="ts">
-definePageMeta({ alias: ['/pt-br/ferramentas-web','/en/ferramentas-web','/es/ferramentas-web'] })
+definePageMeta({
+  alias: [
+    "/pt-br/ferramentas-web",
+    "/en/ferramentas-web",
+    "/es/ferramentas-web",
+  ],
+});
 </script>

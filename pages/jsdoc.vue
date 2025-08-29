@@ -26,9 +26,9 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ alias: ['/pt-br/jsdoc','/en/jsdoc','/es/jsdoc'] })
 import { ref, watch } from "vue";
 import { useHead } from "nuxt/app";
+definePageMeta({ alias: ["/pt-br/jsdoc", "/en/jsdoc", "/es/jsdoc"] });
 
 useHead({
   title: "JSDoc Generator - SuperTool",

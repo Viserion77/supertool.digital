@@ -12,11 +12,12 @@ export default defineNuxtConfig({
       meta: [
         { name: "viewport", content: "width=device-width, initial-scale=1" },
         { name: "theme-color", content: "#2563EB" },
-        { name: "description", content: "Free, fast and privacy-friendly online tools." },
+        {
+          name: "description",
+          content: "Free, fast and privacy-friendly online tools.",
+        },
       ],
-      link: [
-        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }
-      ],
+      link: [{ rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }],
     },
   },
   routeRules: {

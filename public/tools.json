@@ -19,7 +19,7 @@
         "title": { "en": "Popular", "pt-br": "Popular", "es": "Popular" }
       }
     ],
-    "keywords": ["base64","encode","decode"]
+    "keywords": ["base64", "encode", "decode"]
   },
   {
     "category": "geradores",
@@ -35,9 +35,13 @@
       "es": "Genera códigos QR personalizados para URLs, textos y datos diversos."
     },
     "badges": [
-      { "type": "new", "color": "green", "title": { "en": "New", "pt-br": "Novo", "es": "Nuevo" } }
+      {
+        "type": "new",
+        "color": "green",
+        "title": { "en": "New", "pt-br": "Novo", "es": "Nuevo" }
+      }
     ],
-    "keywords": ["qr","code"]
+    "keywords": ["qr", "code"]
   },
   {
     "category": "ferramentas-web",
@@ -53,9 +57,13 @@
       "es": "Decodifica y analiza tokens JWT para depuración y validación."
     },
     "badges": [
-      { "type": "popular", "color": "blue", "title": { "en": "Popular", "pt-br": "Famosinho", "es": "Popular" } }
+      {
+        "type": "popular",
+        "color": "blue",
+        "title": { "en": "Popular", "pt-br": "Famosinho", "es": "Popular" }
+      }
     ],
-    "keywords": ["jwt","token","decode"]
+    "keywords": ["jwt", "token", "decode"]
   },
   {
     "category": "ferramentas-web",
@@ -71,7 +79,7 @@
       "es": "Formatea, valida y minimiza tus archivos JSON con resaltado de sintaxis."
     },
     "badges": [],
-    "keywords": ["json","format","minify"]
+    "keywords": ["json", "format", "minify"]
   },
   {
     "category": "geradores",
@@ -87,7 +95,7 @@
       "es": "Crea paletas de colores armoniosas para tus proyectos."
     },
     "badges": [],
-    "keywords": ["color","palette"]
+    "keywords": ["color", "palette"]
   },
   {
     "category": "documentacao",
@@ -103,6 +111,6 @@
       "es": "Genera JSDoc a partir de JSON o fragmentos de código."
     },
     "badges": [],
-    "keywords": ["jsdoc","docs"]
+    "keywords": ["jsdoc", "docs"]
   }
 ]

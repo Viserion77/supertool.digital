@@ -16,5 +16,7 @@ import { useI18n } from "~/composables/i18n";
 import { watchEffect } from "vue";
 
 const { locale } = useI18n();
-watchEffect(() => { if (process.client) document.documentElement.lang = locale.value; });
+watchEffect(() => {
+  if (import.meta.client) document.documentElement.lang = locale.value;
+});
 </script>

@@ -1,7 +1,9 @@
 <template>
   <section class="container" aria-labelledby="conv-title">
     <h1 id="conv-title">Conversores</h1>
-    <p class="helper">Tools to transform files or data from one format to another.</p>
+    <p class="helper">
+      Tools to transform files or data from one format to another.
+    </p>
     <div class="grid mt-16">
       <NuxtLink class="card" to="/base64-converter">
         <h3>Base64 Converter</h3>
@@ -19,5 +21,7 @@
   </section>
 </template>
 <script setup lang="ts">
-definePageMeta({ alias: ['/pt-br/conversores','/en/conversores','/es/conversores'] })
+definePageMeta({
+  alias: ["/pt-br/conversores", "/en/conversores", "/es/conversores"],
+});
 </script>

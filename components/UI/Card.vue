@@ -2,7 +2,9 @@
   <div class="card-panel">
     <div v-if="$slots.head || title" class="card-head">
       <div class="card-title">
-        <slot name="head"><h3 class="m-0">{{ title }}</h3></slot>
+        <slot name="head"
+          ><h3 class="m-0">{{ title }}</h3></slot
+        >
       </div>
       <div class="card-head-actions">
         <slot name="headActions" />
@@ -18,5 +20,5 @@
 </template>
 
 <script setup lang="ts">
-defineProps<{ title?: string }>()
+defineProps<{ title?: string }>();
 </script>

@@ -1,5 +1,6 @@
 import pg from "pg";
 import { config as dotenvConfig } from "dotenv";
+import dotenvExpand from "dotenv-expand";
 
 const { Client } = pg;
 
@@ -7,7 +8,10 @@ let clientPromise: Promise<pg.Client | null> | null = null;
 
 async function ensureClient(): Promise<pg.Client | null> {
   if (clientPromise) return clientPromise;
-  if (!process.env.POSTGRES_HOST && !process.env.DATABASE_URL) dotenvConfig();
+  if (!process.env.POSTGRES_HOST && !process.env.DATABASE_URL) {
+    const env = dotenvConfig();
+    dotenvExpand.expand(env);
+  }
 
   const hasConfig = !!(process.env.POSTGRES_HOST || process.env.DATABASE_URL);
   if (!hasConfig) {
@@ -19,7 +23,8 @@ async function ensureClient(): Promise<pg.Client | null> {
   const sslRequired =
     sslMode === "require" ||
     process.env.POSTGRES_SSL === "true" ||
-    (process.env.DATABASE_URL && process.env.DATABASE_URL.includes("sslmode=require"));
+    (process.env.DATABASE_URL &&
+      process.env.DATABASE_URL.includes("sslmode=require"));
 
   clientPromise = (async () => {
     const client = new Client({
@@ -41,7 +46,9 @@ async function ensureClient(): Promise<pg.Client | null> {
 async function query(queryObject: string | { text: string; values: string[] }) {
   const connection = await ensureClient();
   if (!connection) throw new Error("DATABASE_NOT_CONFIGURED");
-  return connection.query(queryObject as any);
+  return connection.query(
+    queryObject as string | { text: string; values: unknown[] },
+  );
 }
 
 export default {

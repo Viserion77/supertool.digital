@@ -4,7 +4,7 @@ import { migrationRunner } from "~/resources/migrationRunner";
 export default defineEventHandler(async (event) => {
   try {
     const client = await database.client;
-    if (!client) throw new Error('DATABASE_NOT_CONFIGURED')
+    if (!client) throw new Error("DATABASE_NOT_CONFIGURED");
 
     const requestMethod = event.node.req.method;
     const configuration = {
@@ -33,8 +33,12 @@ export default defineEventHandler(async (event) => {
 
     event.node.res.statusCode = 405;
     return { error: "Method not allowed" };
-  } catch (e: any) {
+  } catch (e: unknown) {
     event.node.res.statusCode = 200;
-    return { migrations: [], status: 'unavailable', error: (e && e.message) || 'not configured' }
+    return {
+      migrations: [],
+      status: "unavailable",
+      error: (e && e.message) || "not configured",
+    };
   }
 });

@@ -9,5 +9,14 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ title: string; description: string; icon: any; variant?: 'green' | 'gray' | 'yellow' | 'blue' }>(), { variant: 'gray' })
+import type { Component } from "vue";
+const _props = withDefaults(
+  defineProps<{
+    title: string;
+    description: string;
+    icon: Component;
+    variant?: "green" | "gray" | "yellow" | "blue";
+  }>(),
+  { variant: "gray" },
+);
 </script>

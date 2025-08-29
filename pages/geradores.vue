@@ -19,5 +19,7 @@
   </section>
 </template>
 <script setup lang="ts">
-definePageMeta({ alias: ['/pt-br/geradores','/en/geradores','/es/geradores'] })
+definePageMeta({
+  alias: ["/pt-br/geradores", "/en/geradores", "/es/geradores"],
+});
 </script>

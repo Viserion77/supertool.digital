@@ -6,7 +6,12 @@
 </template>
 
 <script setup lang="ts">
-withDefaults(defineProps<{ variant?: 'neutral' | 'primary' | 'success' | 'warning' | 'danger' }>(), {
-  variant: 'neutral',
-})
+withDefaults(
+  defineProps<{
+    variant?: "neutral" | "primary" | "success" | "warning" | "danger";
+  }>(),
+  {
+    variant: "neutral",
+  },
+);
 </script>

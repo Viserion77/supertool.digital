@@ -22,17 +22,17 @@ export default defineEventHandler(async () => {
           version: databaseVersion,
           max_connections: parseInt(maxConnections),
           opened_connections: currentConnections,
-          status: 'ok',
+          status: "ok",
         },
       },
     };
-  } catch (e: any) {
+  } catch (e: unknown) {
     return {
       updated_at: now,
       dependencies: {
         database: {
-          status: 'unavailable',
-          error: (e && e.message) || 'not configured',
+          status: "unavailable",
+          error: (e && e.message) || "not configured",
         },
       },
     };

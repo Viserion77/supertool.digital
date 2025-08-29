@@ -9,13 +9,20 @@
 </template>
 
 <script setup lang="ts">
-const props = withDefaults(defineProps<{ size?: number; showText?: boolean; ariaLabel?: string }>(), {
-  size: 32,
-  showText: true,
-  ariaLabel: 'SuperTool.digital',
-})
+const _props = withDefaults(
+  defineProps<{ size?: number; showText?: boolean; ariaLabel?: string }>(),
+  {
+    size: 32,
+    showText: true,
+    ariaLabel: "SuperTool.digital",
+  },
+);
 </script>
 
 <style scoped>
-.brand-logo { display: inline-flex; align-items: center; gap: 12px; }
+.brand-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
 </style>
