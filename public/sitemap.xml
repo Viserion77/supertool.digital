@@ -7,9 +7,63 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://www.supertool.digital/jsdoc</loc>
+    <loc>https://www.supertool.digital/json-to-jsdoc</loc>
     <lastmod>2024-04-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/json-para-jsdoc</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/base64-converter</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/json-formatter</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/jwt-analyzer</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/qr-code-generator</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/color-palette-generator</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/conversores</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/geradores</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://www.supertool.digital/ferramentas-web</loc>
+    <lastmod>2024-04-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
   </url>
 </urlset>

@@ -1,2 +1,3 @@
 User-agent: *
-Allow: /jsdoc
+Allow: /
+Sitemap: https://www.supertool.digital/sitemap.xml

@@ -1,0 +1,39 @@
+{
+  "header.searchPlaceholder": "Search tools...",
+  "nav.converters": "Converters",
+  "nav.generators": "Generators",
+  "nav.webTools": "Web Tools",
+  "actions.suggestTool": "Suggest Tool",
+  "theme.auto": "Auto",
+  "theme.light": "Light",
+  "theme.dark": "Dark",
+
+  "hero.title_line1": "All Tools",
+  "hero.title_line2": "In One Place",
+  "hero.subtitle": "A complete platform of free online tools. Converters, generators and utilities organized for maximum productivity.",
+  "actions.search": "Search",
+  "actions.exploreTools": "Explore Tools",
+  "actions.seePopular": "See Popular",
+
+  "stats.tools": "Tools",
+  "stats.free": "Free",
+  "stats.accounts": "Signups",
+
+  "sections.categories.title": "Tool Categories",
+  "sections.categories.helper": "Organize your workflow with our well‑structured categories, each with specialized tools for your needs.",
+  "sections.featured.title": "Popular Tools",
+  "sections.reasons.title": "Why Choose SuperTool?",
+
+  "categoryDescriptions.conversores": "Transform files and data between different formats with ease and precision.",
+  "categoryDescriptions.geradores": "Create ready-to-use content using rules and patterns to speed up your work.",
+  "categoryDescriptions.ferramentas-web": "Essential utilities for developers and digital professionals for everyday tasks.",
+
+  "category.toolsAvailable": "tools available",
+  "category.more": "more",
+  "category.viewAll": "View All Tools",
+  "category.goto": "Go to category",
+
+  "tool.use": "Use Tool",
+  "badge.popular": "Popular",
+  "badge.new": "New"
+}

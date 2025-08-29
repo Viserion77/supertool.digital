@@ -1,0 +1,39 @@
+{
+  "header.searchPlaceholder": "Buscar ferramentas...",
+  "nav.converters": "Conversores",
+  "nav.generators": "Geradores",
+  "nav.webTools": "Ferramentas Web",
+  "actions.suggestTool": "Sugerir Ferramenta",
+  "theme.auto": "Auto",
+  "theme.light": "Claro",
+  "theme.dark": "Escuro",
+
+  "hero.title_line1": "Todas as Ferramentas",
+  "hero.title_line2": "em Um Só Lugar",
+  "hero.subtitle": "Plataforma completa de ferramentas gratuitas online. Conversores, geradores e utilitários web organizados para máxima produtividade.",
+  "actions.search": "Buscar",
+  "actions.exploreTools": "Explorar Ferramentas",
+  "actions.seePopular": "Ver Mais Populares",
+
+  "stats.tools": "Ferramentas",
+  "stats.free": "Gratuito",
+  "stats.accounts": "Cadastros",
+
+  "sections.categories.title": "Categorias de Ferramentas",
+  "sections.categories.helper": "Organize seu fluxo de trabalho com nossas categorias bem estruturadas, cada uma com ferramentas especializadas para suas necessidades.",
+  "sections.featured.title": "Ferramentas Populares",
+  "sections.reasons.title": "Por que Escolher SuperTool?",
+
+  "categoryDescriptions.conversores": "Transforme arquivos e dados entre diferentes formatos com facilidade e precisão.",
+  "categoryDescriptions.geradores": "Crie conteúdos prontos usando regras e padrões para agilizar seu trabalho.",
+  "categoryDescriptions.ferramentas-web": "Utilitários essenciais para desenvolvedores e profissionais digitais no dia a dia.",
+
+  "category.toolsAvailable": "ferramentas disponíveis",
+  "category.more": "mais",
+  "category.viewAll": "Ver Todas as Ferramentas",
+  "category.goto": "Ir para categoria",
+
+  "tool.use": "Usar Ferramenta",
+  "badge.popular": "Popular",
+  "badge.new": "Novo"
+}

@@ -1,0 +1,49 @@
+<template>
+  <div class="container">
+    <header class="mb-12">
+      <h1>Color Palette Generator</h1>
+      <p class="helper">Crie uma paleta a partir de uma cor base. Copie com um clique.</p>
+    </header>
+
+    <div class="tool-layout">
+      <div class="field">
+        <label for="hex">Cor base (HEX)</label>
+        <input id="hex" class="search-input" v-model="hex" placeholder="#2563EB" />
+        <span class="helper">Use um HEX válido (#RRGGBB).</span>
+      </div>
+      <div class="field">
+        <label>Paleta</label>
+        <div class="grid" style="grid-template-columns: repeat(5, 1fr); gap: 12px;">
+          <button v-for="(c,i) in palette" :key="i" class="swatch btn" :style="{background:c, color: readable(c) }" @click="copy(c)">{{ c }}</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup lang="ts">
+definePageMeta({ alias: ['/pt-br/color-palette-generator','/en/color-palette-generator','/es/color-palette-generator'] })
+import { computed, ref } from 'vue'
+import { useHead } from 'nuxt/app'
+
+useHead({ title: 'Color Palette Generator – Generate tints and shades', meta: [ { name: 'description', content: 'Generate a simple palette from a base hex color. Click to copy.' } ] })
+
+const hex = ref('#2563EB')
+
+function clamp(n:number,min:number,max:number){ return Math.min(max, Math.max(min, n)) }
+function hexToRgb(h:string){ const m = /^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i.exec(h.trim()); if(!m) return null; return { r:parseInt(m[1],16), g:parseInt(m[2],16), b:parseInt(m[3],16) } }
+function rgbToHex(r:number,g:number,b:number){ return '#' + [r,g,b].map(x=>x.toString(16).padStart(2,'0')).join('') }
+function mix(a:string,b:string,ratio:number){ const ar=hexToRgb(a)!, br=hexToRgb(b)!; const r=Math.round(ar.r+(br.r-ar.r)*ratio); const g=Math.round(ar.g+(br.g-ar.g)*ratio); const bb=Math.round(ar.b+(br.b-ar.b)*ratio); return rgbToHex(r,g,bb) }
+
+const palette = computed(()=>{
+  if(!hexToRgb(hex.value)) return [] as string[]
+  return [mix('#ffffff',hex.value,0.15), mix('#ffffff',hex.value,0.35), hex.value, mix(hex.value,'#000000',0.25), mix(hex.value,'#000000',0.45)]
+})
+
+function readable(c:string){ const {r,g,b}=hexToRgb(c)!; const yiq=(r*299+g*587+b*114)/1000; return yiq>=128?'#000':'#fff' }
+function copy(c:string){ navigator.clipboard.writeText(c) }
+</script>
+
+<style>
+.swatch { height: 56px; border: none; border-radius: 12px; font-weight: 700; }
+</style>

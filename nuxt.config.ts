@@ -1,11 +1,40 @@
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
-  devtools: { enabled: true },
+  devtools: { enabled: process.env.NUXT_DEVTOOLS === "true" },
   pages: true,
   modules: ["@nuxt/test-utils/module", "@nuxt/eslint"],
   ignore: ["**/*.test.ts"],
+  css: ["~/assets/styles.css"],
+  app: {
+    head: {
+      titleTemplate: "%s | SuperTool.digital",
+      htmlAttrs: { lang: "pt-BR" },
+      meta: [
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { name: "theme-color", content: "#2563EB" },
+        { name: "description", content: "Free, fast and privacy-friendly online tools." },
+      ],
+      link: [
+        { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" }
+      ],
+    },
+  },
   routeRules: {
     "/": { prerender: true },
     "/jsdoc": { prerender: true },
+    "/json-to-jsdoc": { prerender: true },
+    "/json-para-jsdoc": { redirect: "/json-to-jsdoc" },
+    "/base64-converter": { prerender: true },
+    "/conversores": { prerender: true },
+    "/geradores": { prerender: true },
+    "/ferramentas-web": { prerender: true },
+    "/jwt-analyzer": { prerender: true },
+    "/json-formatter": { prerender: true },
+    "/qr-code-generator": { prerender: true },
+    "/color-palette-generator": { prerender: true },
+    "/privacidade": { prerender: true },
+    "/contato": { prerender: true },
+    "/suporte": { prerender: true },
+    "/termos": { prerender: true },
   },
 });

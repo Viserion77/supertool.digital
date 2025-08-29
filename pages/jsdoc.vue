@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container jsdoc-container">
     <h1>JSDoc Generator</h1>
     <p>
       Welcome to the JSDoc Generator! This tool helps you generate JSDoc
@@ -26,6 +26,7 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({ alias: ['/pt-br/jsdoc','/en/jsdoc','/es/jsdoc'] })
 import { ref, watch } from "vue";
 import { useHead } from "nuxt/app";
 
@@ -143,8 +144,8 @@ const generateJSDoc = () => {
 watch(objectInput, generateJSDoc);
 </script>
 
-<style>
-.container {
+<style scoped>
+.jsdoc-container {
   display: flex;
   flex-direction: column;
   align-items: center;
