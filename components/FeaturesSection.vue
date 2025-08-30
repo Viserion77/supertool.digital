@@ -39,6 +39,13 @@ const { t } = useI18n();
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ui-container-padding);
+}
+
 .features-section {
   padding: 40px 0;
 }
