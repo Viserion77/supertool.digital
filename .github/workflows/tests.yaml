@@ -14,16 +14,5 @@ jobs:
           node-version: 22
 
       - run: npm ci
-      - run: |
-          cat > .env << EOF
-          POSTGRES_HOST=localhost
-          POSTGRES_PORT=5432
-          POSTGRES_USER=postgres
-          POSTGRES_PASSWORD=postgres
-          POSTGRES_DATABASE=supertool_test
-          DATABASE_URL=postgres://postgres:postgres@localhost:5432/supertool_test
-          EOF
-      - run: npm run services:up
-      - run: npm run wait-for-postgres
-      - run: npm run migration:up
-      - run: npx vitest --run
+      - run: cp .env.example .env
+      - run: npm test

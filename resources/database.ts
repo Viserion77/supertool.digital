@@ -1,57 +1,32 @@
 import pg from "pg";
 import { config as dotenvConfig } from "dotenv";
-import dotenvExpand from "dotenv-expand";
 
 const { Client } = pg;
 
-let clientPromise: Promise<pg.Client | null> | null = null;
+async function createClient() {
+  if (!process.env.POSTGRES_HOST) dotenvConfig(); // TODO refatorar
 
-async function ensureClient(): Promise<pg.Client | null> {
-  if (clientPromise) return clientPromise;
-  if (!process.env.POSTGRES_HOST && !process.env.DATABASE_URL) {
-    const env = dotenvConfig();
-    dotenvExpand.expand(env);
-  }
+  const client = new Client({
+    host: process.env.POSTGRES_HOST,
+    port: Number(process.env.POSTGRES_PORT ?? 5432),
+    user: process.env.POSTGRES_USER,
+    database: process.env.POSTGRES_DATABASE,
+    password: process.env.POSTGRES_PASSWORD,
+    ssl: process.env.NODE_ENV === "production",
+  });
 
-  const hasConfig = !!(process.env.POSTGRES_HOST || process.env.DATABASE_URL);
-  if (!hasConfig) {
-    clientPromise = Promise.resolve(null);
-    return clientPromise;
-  }
-
-  const sslMode = (process.env.PGSSLMODE || "").toLowerCase();
-  const sslRequired =
-    sslMode === "require" ||
-    process.env.POSTGRES_SSL === "true" ||
-    (process.env.DATABASE_URL &&
-      process.env.DATABASE_URL.includes("sslmode=require"));
-
-  clientPromise = (async () => {
-    const client = new Client({
-      host: process.env.POSTGRES_HOST,
-      port: Number(process.env.POSTGRES_PORT ?? 5432),
-      user: process.env.POSTGRES_USER,
-      database: process.env.POSTGRES_DATABASE,
-      password: process.env.POSTGRES_PASSWORD,
-      ssl: sslRequired ? { rejectUnauthorized: false } : undefined,
-      connectionString: process.env.DATABASE_URL,
-    });
-    await client.connect();
-    return client;
-  })();
-
-  return clientPromise;
+  await client.connect();
+  return client;
 }
 
+const client = createClient();
+
 async function query(queryObject: string | { text: string; values: string[] }) {
-  const connection = await ensureClient();
-  if (!connection) throw new Error("DATABASE_NOT_CONFIGURED");
-  return connection.query(
-    queryObject as string | { text: string; values: unknown[] },
-  );
+  const connection = await client;
+  return connection.query(queryObject);
 }
 
 export default {
   query,
-  client: ensureClient(),
+  client,
 };
