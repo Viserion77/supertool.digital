@@ -1,62 +1,52 @@
 <template>
-  <div class="container">
-    <nav class="breadcrumbs" aria-label="Breadcrumb">
-      <NuxtLink to="/">Início</NuxtLink>
-      <span>›</span>
-      <NuxtLink to="/conversores">Conversores</NuxtLink>
-      <span>›</span>
-      <span>Base64</span>
-    </nav>
-
-    <header class="mb-12">
-      <h1>Conversor Base64</h1>
-      <p class="helper">
-        Codifique e decodifique texto em Base64 de forma rápida e segura.
-      </p>
-      <div class="badges mt-8">
-        <UiBadge variant="neutral">Gratuito</UiBadge>
-        <UiBadge variant="success">Sem Cadastro</UiBadge>
-        <UiBadge variant="warning">Seguro</UiBadge>
-      </div>
-    </header>
-
+  <ToolShell
+    :category="toolData?.category || 'converters'"
+    :tool-key="TOOL_KEY"
+    :badges="toolBadges"
+  >
     <div class="sidebar-grid">
       <UiCard>
         <template #head>
           <strong>{{
-            decode ? "Decodificar de Base64" : "Codificar para Base64"
+            decode
+              ? t("tools.base64Converter.decode")
+              : t("tools.base64Converter.encode")
           }}</strong>
         </template>
         <template #headActions>
           <label class="helper inline-flex">
             <input v-model="decode" type="checkbox" />
-            Decodificar
+            {{ t("tools.base64Converter.decodeMode") }}
           </label>
         </template>
 
         <div class="field mt-12">
           <label :for="inputId">{{
-            decode ? "Texto para decodificar" : "Texto para codificar"
+            decode
+              ? t("tools.base64Converter.inputDecode")
+              : t("tools.base64Converter.inputEncode")
           }}</label>
           <textarea
             :id="inputId"
             v-model="input"
-            placeholder="Digite o texto que deseja converter para Base64..."
+            :placeholder="t('tools.base64Converter.placeholder')"
           />
-          <div class="helper">Caracteres: {{ count }}</div>
+          <div class="helper">{{ t("common.characters") }}: {{ count }}</div>
         </div>
 
         <template #actions>
           <UiButton variant="primary" @click="convert">{{
-            decode ? "Decodificar" : "Codificar"
+            decode
+              ? t("tools.base64Converter.decode")
+              : t("tools.base64Converter.encode")
           }}</UiButton>
-          <UiButton @click="clearAll">Limpar Tudo</UiButton>
-          <UiButton @click="copy">Copiar</UiButton>
-          <UiButton @click="download">Baixar .txt</UiButton>
+          <UiButton @click="clearAll">{{ t("actions.clearAll") }}</UiButton>
+          <UiButton @click="copy">{{ t("actions.copy") }}</UiButton>
+          <UiButton @click="download">{{ t("actions.download") }}</UiButton>
         </template>
 
         <div class="field mt-12">
-          <label for="b64-out">Resultado</label>
+          <label for="b64-out">{{ t("common.result") }}</label>
           <textarea id="b64-out" v-model="output" readonly />
         </div>
 
@@ -64,44 +54,62 @@
       </UiCard>
 
       <div class="stack">
-        <UiCard title="O que é Base64?">
+        <UiCard :title="t('tools.base64Converter.whatIs')">
           <p class="helper">
-            Base64 é um sistema de codificação que converte dados binários em
-            texto ASCII. É amplamente usado para transmitir dados em sistemas
-            que lidam apenas com texto.
+            {{ t("tools.base64Converter.description") }}
           </p>
-          <h4 class="mt-12">Usos comuns</h4>
+          <h4 class="mt-12">{{ t("tools.base64Converter.commonUses") }}</h4>
           <ul class="helper">
-            <li>Incorporar imagens em HTML/CSS</li>
-            <li>Transmitir dados via e-mail</li>
-            <li>Armazenar dados binários em JSON</li>
-            <li>APIs e web services</li>
+            <li>{{ t("tools.base64Converter.use1") }}</li>
+            <li>{{ t("tools.base64Converter.use2") }}</li>
+            <li>{{ t("tools.base64Converter.use3") }}</li>
+            <li>{{ t("tools.base64Converter.use4") }}</li>
           </ul>
         </UiCard>
 
-        <UiCard title="Exemplos">
+        <UiCard :title="t('common.examples')">
           <div class="mt-8">
-            <div class="helper">Texto:</div>
-            <div class="code">Olá, mundo!</div>
+            <div class="helper">{{ t("common.text") }}:</div>
+            <div class="code">{{ t("tools.base64Converter.exampleText") }}</div>
           </div>
           <div class="mt-8">
             <div class="helper">Base64:</div>
-            <div class="code">T2zDoSwgbXVuZG8h</div>
+            <div class="code">
+              {{ t("tools.base64Converter.exampleBase64") }}
+            </div>
           </div>
         </UiCard>
       </div>
     </div>
-  </div>
+  </ToolShell>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useHead } from "nuxt/app";
 import UiButton from "~/components/UI/Button.vue";
-import UiBadge from "~/components/UI/Badge.vue";
 import UiCard from "~/components/UI/Card.vue";
+import ToolShell from "~/components/layout/ToolShell.vue";
+import { getToolByKey } from "~/server/data/tools";
+import { useI18n } from "~/composables/i18n";
+
+const { t } = useI18n();
+
+const TOOL_KEY = "base64Converter";
+const toolData = getToolByKey(TOOL_KEY);
+const toolBadges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
 definePageMeta({
   alias: [
+    "/base64-converter",
     "/pt-br/base64-converter",
     "/en/base64-converter",
     "/es/base64-converter",
@@ -174,7 +182,7 @@ function convert() {
       ? decodeUnicode(input.value)
       : encodeUnicode(input.value);
   } catch {
-    error.value = "Falha na conversão. Verifique seu texto.";
+    error.value = t("common.error");
     output.value = "";
   }
 }

@@ -1,44 +1,43 @@
 <template>
-  <div class="card category-card-extended">
-    <div class="cc-header">
-      <div class="cc-title">
-        <span class="cc-icon" :class="variant">
-          <component :is="icon" :size="18" aria-hidden="true" />
+  <div class="category-card ui-card">
+    <header class="header">
+      <div class="title-section">
+        <span class="ui-icon" :class="variant">
+          <component :is="icon" :size="20" />
         </span>
-        <div>
-          <h3 class="m-0">{{ title }}</h3>
-          <div class="helper">
+        <div class="text">
+          <h3>{{ title }}</h3>
+          <div class="ui-helper">
             {{ count }} {{ t("category.toolsAvailable") }}
           </div>
         </div>
       </div>
-      <NuxtLink
-        :to="withLocale(to)"
-        class="cc-arrow"
+      <UiButton
+        class="arrow-button"
+        variant="plain"
+        :icon="ArrowRight"
+        :icon-size="18"
         :aria-label="t('category.goto')"
-      >
-        <ArrowRight :size="18" aria-hidden="true" />
-      </NuxtLink>
-    </div>
+        @click="goToCategory"
+      />
+    </header>
 
-    <hr class="cc-divider" />
+    <hr class="ui-divider" />
 
-    <p class="cc-desc">{{ description }}</p>
+    <p class="description">{{ description }}</p>
 
-    <div class="cc-tags">
-      <span v-for="(tag, i) in previewTags" :key="i" class="chip">{{
+    <div class="tags">
+      <span v-for="tag in previewTags" :key="tag" class="ui-chip">{{
         tag
       }}</span>
-      <span v-if="moreCount > 0" class="helper"
+      <span v-if="hasMoreTags" class="ui-helper"
         >+{{ moreCount }} {{ t("category.more") }}</span
       >
     </div>
 
-    <div class="cc-footer">
-      <UiButton variant="outline" full @click="goAllTools">{{
-        t("category.viewAll")
-      }}</UiButton>
-    </div>
+    <UiButton variant="outline" full @click="goToCategory">{{
+      t("category.viewAll")
+    }}</UiButton>
   </div>
 </template>
 
@@ -47,7 +46,6 @@ import { computed, type Component } from "vue";
 import { ArrowRight } from "lucide-vue-next";
 import UiButton from "~/components/UI/Button.vue";
 import { useI18n } from "~/composables/i18n";
-
 import { navigateTo } from "#app";
 
 const props = defineProps<{
@@ -60,14 +58,62 @@ const props = defineProps<{
   variant?: "blue" | "green" | "yellow";
   icon: Component;
 }>();
-const previewTags = computed(() => props.tags.slice(0, 3));
-const variant = computed(() => props.variant ?? "blue");
+
 const { t, withLocale } = useI18n();
-const catKey = computed(() => (props.to || "").replace(/^\//, ""));
-const goAllTools = () => {
-  navigateTo({
-    path: withLocale("/todas-as-ferramentas"),
-    query: { cat: catKey.value },
-  });
-};
+
+const previewTags = computed(() => props.tags.slice(0, 3));
+const hasMoreTags = computed(() => props.moreCount && props.moreCount > 0);
+
+const goToCategory = () => navigateTo(withLocale(props.to));
 </script>
+
+<style scoped>
+.category-card {
+  display: grid;
+  gap: 10px;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.title-section {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.text h3 {
+  font-size: 18px;
+  margin: 0;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  align-items: center;
+  gap: var(--ui-gap);
+  flex-wrap: wrap;
+}
+
+.arrow-button {
+  transition: var(--transition-fast);
+}
+
+.category-card:hover .arrow-button {
+  transform: translateX(4px);
+}
+</style>

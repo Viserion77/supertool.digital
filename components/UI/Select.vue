@@ -22,3 +22,40 @@ const val = computed({
   set: (v: string) => emit("update:modelValue", v),
 });
 </script>
+
+<style scoped>
+.select-root {
+  display: inline-flex;
+  align-items: center;
+}
+
+.select-input {
+  padding: var(--ui-padding);
+  min-height: var(--ui-min-height);
+  font-size: var(--ui-font-size);
+  border-radius: var(--ui-border-radius);
+  border: var(--ui-border);
+  background: var(--card);
+  color: var(--text);
+  box-shadow: var(--ui-shadow);
+  transition: var(--transition-fast);
+}
+
+.select-input:focus {
+  outline: var(--ui-outline);
+  outline-offset: var(--ui-outline-offset);
+}
+</style>
+
+<style>
+html[data-theme="dark"] .select-input {
+  background: var(--input-bg-dark) !important;
+  color: var(--text);
+  border: none !important;
+}
+
+html[data-theme="dark"] .select-input option {
+  background: var(--input-bg-dark);
+  color: var(--text);
+}
+</style>

@@ -1,13 +1,9 @@
 <template>
-  <div class="container">
-    <header class="mb-12">
-      <h1>JWT Token Analyzer</h1>
-      <p class="helper">
-        Analise um JSON Web Token sem enviar seus dados. Decodifica Header e
-        Payload localmente.
-      </p>
-    </header>
-
+  <ToolShell
+    :category="toolData?.category || 'web-tools'"
+    :tool-key="TOOL_KEY"
+    :badges="toolBadges"
+  >
     <div class="tool-layout">
       <div class="field">
         <label for="jwt-in">JWT</label>
@@ -16,29 +12,47 @@
           v-model="token"
           placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0IiwibmFtZSI6IkFkYSIsImlhdCI6MTUxNjIzOTAyMn0.SflKxwRJSMeKKF2..."
         />
-        <span class="helper"
-          >Cole um token no formato header.payload.signature</span
-        >
+        <span class="helper">{{ t("tools.jwtAnalyzer.helper") }}</span>
       </div>
       <div class="field">
-        <label for="out">Resultado</label>
+        <label for="out">{{ t("common.result") }}</label>
         <textarea id="out" :value="pretty" readonly />
       </div>
     </div>
 
     <div class="actions mt-12">
-      <button class="btn btn-primary" @click="analyze">Analisar</button>
-      <button class="btn" @click="copy">Copiar</button>
-      <button class="btn" @click="clearAll">Limpar</button>
+      <button class="btn btn-primary" @click="analyze">
+        {{ t("tools.jwtAnalyzer.analyze") }}
+      </button>
+      <button class="btn" @click="copy">{{ t("actions.copy") }}</button>
+      <button class="btn" @click="clearAll">{{ t("actions.clearAll") }}</button>
     </div>
 
     <p v-if="error" class="error mt-8" aria-live="polite">{{ error }}</p>
-  </div>
+  </ToolShell>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { useHead } from "nuxt/app";
+import ToolShell from "~/components/layout/ToolShell.vue";
+import { getToolByKey } from "~/server/data/tools";
+import { useI18n } from "~/composables/i18n";
+
+const { t } = useI18n();
+
+const TOOL_KEY = "jwtAnalyzer";
+const toolData = getToolByKey(TOOL_KEY);
+const toolBadges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
 definePageMeta({
   alias: ["/pt-br/jwt-analyzer", "/en/jwt-analyzer", "/es/jwt-analyzer"],
 });
@@ -66,7 +80,7 @@ function b64urlToStr(input: string) {
     const bytes = new Uint8Array([...bin].map((c) => c.charCodeAt(0)));
     return new TextDecoder().decode(bytes);
   } catch {
-    throw new Error("Base64 inválido");
+    throw new Error(t("tools.jwtAnalyzer.invalidBase64"));
   }
 }
 
@@ -75,7 +89,7 @@ function analyze() {
   pretty.value = "";
   const parts = token.value.split(".");
   if (parts.length < 2) {
-    error.value = "Token inválido: esperado header.payload[.signature]";
+    error.value = t("tools.jwtAnalyzer.invalidToken");
     return;
   }
   try {
@@ -84,7 +98,7 @@ function analyze() {
     const result = { header, payload, hasSignature: parts.length === 3 };
     pretty.value = JSON.stringify(result, null, 2);
   } catch {
-    error.value = "Falha ao decodificar. Verifique seu token.";
+    error.value = t("tools.jwtAnalyzer.decodeError");
   }
 }
 

@@ -5,15 +5,20 @@
       <div class="card">
         <p class="m-0">
           Encontrou um problema? Envie detalhes por e-mail:
-          <a href="mailto:vise@seventysete.com">vise@seventysete.com</a>.
+          <a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a
+          >.
         </p>
       </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
+<script setup>
+const {
+  public: { contactEmail },
+} = useRuntimeConfig();
+
 definePageMeta({
-  alias: ["/pt-br/reportar-bug", "/en/report-bug", "/es/reportar-error"],
+  alias: ["/pt-br/report-bug", "/en/report-bug", "/es/report-bug"],
 });
 </script>

@@ -1,46 +1,67 @@
 <template>
-  <div class="container">
-    <header class="mb-12">
-      <h1>JSON to JSDoc Converter</h1>
-      <p class="helper">
-        Convert JSON into JSDoc comments. Free, online, no signup.
-      </p>
-    </header>
-
+  <ToolShell
+    :category="toolData?.category || 'documentation'"
+    :tool-key="TOOL_KEY"
+    :badges="toolBadges"
+  >
     <div class="tool-layout">
       <div class="field">
-        <label for="json-in">JSON input</label>
+        <label for="json-in">{{ t("tools.jsonToJsdoc.jsonInput") }}</label>
         <textarea
           id="json-in"
           v-model="input"
-          placeholder='{"name":"Ada","age":36,"skills":["math","logic"]}'
+          :placeholder="t('tools.jsonToJsdoc.placeholder')"
           aria-describedby="json-help"
         />
-        <span id="json-help" class="helper"
-          >Paste a valid JSON object. We do not execute code.</span
-        >
+        <span id="json-help" class="helper">{{
+          t("tools.jsonToJsdoc.helper")
+        }}</span>
       </div>
       <div class="field">
-        <label for="jsdoc-out">JSDoc output</label>
+        <label for="jsdoc-out">{{ t("tools.jsonToJsdoc.jsdocOutput") }}</label>
         <textarea id="jsdoc-out" v-model="output" readonly />
       </div>
     </div>
 
     <div class="actions mt-12">
-      <button class="btn btn-primary" @click="convert">Convert</button>
-      <button class="btn" @click="copy">Copy</button>
-      <button class="btn" @click="clearAll">Clear</button>
-      <button class="btn" @click="download('txt')">Download .txt</button>
-      <button class="btn" @click="download('md')">Download .md</button>
+      <button class="btn btn-primary" @click="convert">
+        {{ t("tools.jsonToJsdoc.convert") }}
+      </button>
+      <button class="btn" @click="copy">{{ t("actions.copy") }}</button>
+      <button class="btn" @click="clearAll">{{ t("actions.clearAll") }}</button>
+      <button class="btn" @click="download('txt')">
+        {{ t("tools.jsonToJsdoc.downloadTxt") }}
+      </button>
+      <button class="btn" @click="download('md')">
+        {{ t("tools.jsonToJsdoc.downloadMd") }}
+      </button>
     </div>
 
     <p v-if="error" class="error mt-8" aria-live="polite">{{ error }}</p>
-  </div>
+  </ToolShell>
 </template>
 
 <script setup lang="ts">
 import { ref } from "vue";
 import { useHead } from "nuxt/app";
+import ToolShell from "~/components/layout/ToolShell.vue";
+import { getToolByKey } from "~/server/data/tools";
+import { useI18n } from "~/composables/i18n";
+
+const { t } = useI18n();
+
+const TOOL_KEY = "jsdoc";
+const toolData = getToolByKey(TOOL_KEY);
+const toolBadges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
 definePageMeta({
   alias: ["/pt-br/json-to-jsdoc", "/en/json-to-jsdoc", "/es/json-to-jsdoc"],
 });
@@ -106,7 +127,7 @@ function convert() {
   try {
     data = JSON.parse(input.value);
   } catch {
-    error.value = "Invalid JSON. Please provide a valid JSON object.";
+    error.value = t("tools.jsonToJsdoc.invalidJson");
     return;
   }
 

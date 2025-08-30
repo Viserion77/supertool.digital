@@ -11,7 +11,8 @@
       <div class="card">
         <p class="m-0">
           Dúvidas adicionais? Escreva para
-          <a href="mailto:vise@seventysete.com">vise@seventysete.com</a>.
+          <a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a
+          >.
         </p>
       </div>
     </div>
@@ -19,5 +20,9 @@
 </template>
 
 <script setup lang="ts">
+const {
+  public: { contactEmail },
+} = useRuntimeConfig();
+
 definePageMeta({ alias: ["/pt-br/faq", "/en/faq", "/es/faq"] });
 </script>

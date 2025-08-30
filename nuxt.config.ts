@@ -1,3 +1,25 @@
+import tools from "./server/data/tools";
+
+// Generate dynamic routes from tools data
+const generateRoutes = () => {
+  const routes: Record<string, { prerender: boolean }> = {};
+
+  // Get unique categories
+  const categories = [...new Set(tools.map((tool) => tool.category))];
+
+  // Add category routes
+  categories.forEach((category) => {
+    routes[`/${category}`] = { prerender: true };
+  });
+
+  // Add tool routes
+  tools.forEach((tool) => {
+    routes[tool.path] = { prerender: true };
+  });
+
+  return routes;
+};
+
 export default defineNuxtConfig({
   compatibilityDate: "2024-04-03",
   devtools: { enabled: process.env.NUXT_DEVTOOLS === "true" },
@@ -5,6 +27,11 @@ export default defineNuxtConfig({
   modules: ["@nuxt/test-utils/module", "@nuxt/eslint"],
   ignore: ["**/*.test.ts"],
   css: ["~/assets/styles.css"],
+  runtimeConfig: {
+    public: {
+      contactEmail: "vise@seventysete.com",
+    },
+  },
   app: {
     head: {
       titleTemplate: "%s | SuperTool.digital",
@@ -22,20 +49,14 @@ export default defineNuxtConfig({
   },
   routeRules: {
     "/": { prerender: true },
-    "/jsdoc": { prerender: true },
-    "/json-to-jsdoc": { prerender: true },
-    "/json-para-jsdoc": { redirect: "/json-to-jsdoc" },
-    "/base64-converter": { prerender: true },
-    "/conversores": { prerender: true },
-    "/geradores": { prerender: true },
-    "/ferramentas-web": { prerender: true },
-    "/jwt-analyzer": { prerender: true },
-    "/json-formatter": { prerender: true },
-    "/qr-code-generator": { prerender: true },
-    "/color-palette-generator": { prerender: true },
-    "/privacidade": { prerender: true },
-    "/contato": { prerender: true },
-    "/suporte": { prerender: true },
-    "/termos": { prerender: true },
+    "/all-tools": { prerender: true },
+    "/privacy": { prerender: true },
+    "/contact": { prerender: true },
+    "/support": { prerender: true },
+    "/terms": { prerender: true },
+    "/faq": { prerender: true },
+    "/report-bug": { prerender: true },
+    "/.well-known/**": { headers: { "X-Robots-Tag": "noindex" } },
+    ...generateRoutes(),
   },
 });

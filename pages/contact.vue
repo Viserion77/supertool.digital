@@ -5,13 +5,20 @@
       <div class="card">
         <p class="m-0">
           Atendimento exclusivamente por e-mail:
-          <a href="mailto:vise@seventysete.com">vise@seventysete.com</a>.
+          <a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a
+          >.
         </p>
       </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-definePageMeta({ alias: ["/pt-br/contato", "/en/contato", "/es/contato"] });
+<script setup>
+const {
+  public: { contactEmail },
+} = useRuntimeConfig();
+
+definePageMeta({
+  alias: ["/pt-br/contact", "/en/contact", "/es/contact"],
+});
 </script>

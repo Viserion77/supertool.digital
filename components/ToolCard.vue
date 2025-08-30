@@ -1,29 +1,24 @@
 <template>
-  <NuxtLink :to="withLocale(to)" class="card tool-card">
-    <div class="tool-card-header">
-      <div class="tool-title-row">
-        <h3 class="m-0">{{ title }}</h3>
-        <ExternalLink :size="16" aria-hidden="true" />
+  <NuxtLink :to="withLocale(to)" class="ui-card tool-card">
+    <header class="header">
+      <div class="title-row">
+        <h3>{{ title }}</h3>
+        <ExternalLink :size="16" />
       </div>
-      <div class="tool-meta">
-        <span class="helper">{{ category }}</span>
-        <span
-          v-if="badge"
-          :class="['pill', badge === 'popular' ? 'popular' : 'new']"
-        >
-          <component :is="badgeIcon" :size="14" aria-hidden="true" />
+      <div class="meta">
+        <span class="ui-helper">{{ category }}</span>
+        <span v-if="badge" :class="['ui-pill', badge]">
+          <component :is="badgeIcon" :size="14" />
           {{ badgeLabel }}
         </span>
       </div>
-    </div>
+    </header>
 
-    <p class="tool-desc">{{ description }}</p>
+    <p class="description">{{ description }}</p>
 
-    <div class="cc-footer">
-      <UiButton variant="outline" :to="withLocale(to)" full>{{
-        t("tool.use")
-      }}</UiButton>
-    </div>
+    <UiButton variant="outline" :to="withLocale(to)" full>{{
+      t("tool.use")
+    }}</UiButton>
   </NuxtLink>
 </template>
 
@@ -43,12 +38,46 @@ const props = defineProps<{
 }>();
 
 const { t, withLocale } = useI18n();
+
 const badgeIcon = computed(() => (props.badge === "popular" ? Star : Sparkles));
-const defaultBadgeLabel = computed(() =>
-  props.badge === "popular" ? t("badge.popular") : t("badge.new"),
-);
 const badgeLabel = computed(
-  () => props.badgeLabelOverride || defaultBadgeLabel.value,
+  () =>
+    props.badgeLabelOverride ||
+    (props.badge === "popular" ? t("badge.popular") : t("badge.new")),
 );
-const badge = computed(() => props.badge ?? null);
 </script>
+
+<style scoped>
+.tool-card {
+  display: grid;
+  gap: 10px;
+}
+
+.header {
+  display: grid;
+  gap: 6px;
+}
+
+.title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.title-row h3 {
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.description {
+  margin: 0;
+  color: var(--muted);
+  min-height: 48px;
+}
+</style>

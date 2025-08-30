@@ -19,8 +19,8 @@
   </section>
 </template>
 
-<script setup lang="ts">
+<script setup>
 definePageMeta({
-  alias: ["/pt-br/privacidade", "/en/privacidade", "/es/privacidade"],
+  alias: ["/pt-br/privacy", "/en/privacy", "/es/privacy"],
 });
 </script>

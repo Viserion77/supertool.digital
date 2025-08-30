@@ -1,34 +1,34 @@
 <template>
-  <div class="container">
-    <header class="mb-12">
-      <h1>QR Code Generator</h1>
-      <p class="helper">
-        Gere QR Codes a partir de texto ou links. Todo o processamento ocorre no
-        seu navegador.
-      </p>
-    </header>
-
+  <ToolShell
+    :category="toolData?.category || 'generators'"
+    :tool-key="TOOL_KEY"
+    :badges="toolBadges"
+  >
     <div class="sidebar-grid">
-      <UiCard title="Entrada">
+      <UiCard :title="t('tools.qrCodeGenerator.input')">
         <div class="field">
-          <label for="qr-text">Texto ou URL</label>
+          <label for="qr-text">{{
+            t("tools.qrCodeGenerator.textOrUrl")
+          }}</label>
           <textarea
             id="qr-text"
             v-model="text"
             placeholder="https://www.supertool.digital"
           />
-          <span class="helper">Nenhum dado é enviado ao servidor.</span>
+          <span class="helper">{{
+            t("tools.qrCodeGenerator.noDataSent")
+          }}</span>
         </div>
 
         <template #actions>
-          <UiButton @click="text = ''">Limpar</UiButton>
+          <UiButton @click="text = ''">{{ t("actions.clearAll") }}</UiButton>
         </template>
 
         <div class="field mt-12">
-          <label>Opções</label>
+          <label>{{ t("tools.qrCodeGenerator.options") }}</label>
           <div class="actions qr-controls">
             <label class="inline-flex">
-              <span class="helper">Tamanho</span>
+              <span class="helper">{{ t("tools.qrCodeGenerator.size") }}</span>
               <input
                 v-model.number="size"
                 type="range"
@@ -38,7 +38,9 @@
               />
             </label>
             <label class="inline-flex">
-              <span class="helper">Margem</span>
+              <span class="helper">{{
+                t("tools.qrCodeGenerator.margin")
+              }}</span>
               <input
                 v-model.number="margin"
                 type="range"
@@ -48,7 +50,9 @@
               />
             </label>
             <label class="inline-flex">
-              <span class="helper">Erro</span>
+              <span class="helper">{{
+                t("tools.qrCodeGenerator.errorCorrection")
+              }}</span>
               <select v-model="ec" class="select-input">
                 <option value="L">L (7%)</option>
                 <option value="M">M (15%)</option>
@@ -57,18 +61,20 @@
               </select>
             </label>
             <label class="inline-flex">
-              <span class="helper">Cor</span>
+              <span class="helper">{{ t("tools.qrCodeGenerator.color") }}</span>
               <input v-model="dark" type="color" />
             </label>
             <label class="inline-flex">
-              <span class="helper">Fundo</span>
+              <span class="helper">{{
+                t("tools.qrCodeGenerator.background")
+              }}</span>
               <input v-model="light" type="color" />
             </label>
           </div>
         </div>
       </UiCard>
 
-      <UiCard title="Pré-visualização">
+      <UiCard :title="t('tools.qrCodeGenerator.preview')">
         <div id="qr-out" class="card-section qr-preview">
           <canvas
             ref="canvasRef"
@@ -78,15 +84,15 @@
           />
         </div>
         <template #actions>
-          <UiButton variant="primary" :disabled="!ready" @click="downloadPng"
-            >Baixar PNG</UiButton
-          >
+          <UiButton variant="primary" :disabled="!ready" @click="downloadPng">{{
+            t("tools.qrCodeGenerator.downloadPng")
+          }}</UiButton>
         </template>
       </UiCard>
     </div>
 
     <p class="helper mt-12">
-      Esta ferramenta usa a biblioteca
+      {{ t("tools.qrCodeGenerator.libraryNote") }}
       <a
         href="https://www.npmjs.com/package/qrcode"
         target="_blank"
@@ -94,7 +100,7 @@
         >qrcode</a
       >.
     </p>
-  </div>
+  </ToolShell>
 </template>
 
 <script setup lang="ts">
@@ -102,8 +108,27 @@ import { ref, watch, onMounted, nextTick } from "vue";
 import { useHead } from "nuxt/app";
 import UiButton from "~/components/UI/Button.vue";
 import UiCard from "~/components/UI/Card.vue";
+import ToolShell from "~/components/layout/ToolShell.vue";
+import { getToolByKey } from "~/server/data/tools";
+import { useI18n } from "~/composables/i18n";
+
+const { t } = useI18n();
+
+const TOOL_KEY = "qrCodeGenerator";
+const toolData = getToolByKey(TOOL_KEY);
+const toolBadges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
 definePageMeta({
   alias: [
+    "/qr-code-generator",
     "/pt-br/qr-code-generator",
     "/en/qr-code-generator",
     "/es/qr-code-generator",

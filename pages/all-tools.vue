@@ -2,10 +2,9 @@
   <section class="container" aria-labelledby="all-tools-title">
     <h1 id="all-tools-title">Todas as Ferramentas</h1>
     <div class="toolbar-row mt-16">
-      <input
+      <UiInput
         ref="qInputRef"
         v-model="q"
-        class="header-input"
         type="search"
         placeholder="Buscar ferramentas..."
         aria-label="Buscar ferramentas"
@@ -30,6 +29,7 @@
 import { computed, ref, watch, nextTick, onMounted } from "vue";
 import { useRoute } from "#app";
 import ToolCard from "~/components/ToolCard.vue";
+import UiInput from "~/components/UI/Input.vue";
 import { useI18n } from "~/composables/i18n";
 
 const { t } = useI18n();
@@ -128,6 +128,14 @@ const filtered = computed(() => {
 });
 
 definePageMeta({
-  alias: ["/pt-br/todas-as-ferramentas", "/en/tools", "/es/herramientas"],
+  alias: [
+    "/all-tools",
+    "/pt-br/all-tools",
+    "/en/all-tools",
+    "/es/all-tools",
+    "/pt-br/ferramentas",
+    "/en/tools",
+    "/es/herramientas",
+  ],
 });
 </script>

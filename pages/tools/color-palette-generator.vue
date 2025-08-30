@@ -1,25 +1,26 @@
 <template>
-  <div class="container">
-    <header class="mb-12">
-      <h1>Color Palette Generator</h1>
-      <p class="helper">
-        Crie uma paleta a partir de uma cor base. Copie com um clique.
-      </p>
-    </header>
-
+  <ToolShell
+    :category="toolData?.category || 'generators'"
+    :tool-key="TOOL_KEY"
+    :badges="toolBadges"
+  >
     <div class="tool-layout">
       <div class="field">
-        <label for="hex">Cor base (HEX)</label>
+        <label for="hex">{{
+          t("tools.colorPaletteGenerator.baseColor")
+        }}</label>
         <input
           id="hex"
           v-model="hex"
           class="search-input"
           placeholder="#2563EB"
         />
-        <span class="helper">Use um HEX válido (#RRGGBB).</span>
+        <span class="helper">{{
+          t("tools.colorPaletteGenerator.hexHelper")
+        }}</span>
       </div>
       <div class="field">
-        <label>Paleta</label>
+        <label>{{ t("tools.colorPaletteGenerator.palette") }}</label>
         <div
           class="grid"
           style="grid-template-columns: repeat(5, 1fr); gap: 12px"
@@ -36,12 +37,30 @@
         </div>
       </div>
     </div>
-  </div>
+  </ToolShell>
 </template>
 
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import { useHead } from "nuxt/app";
+import ToolShell from "~/components/layout/ToolShell.vue";
+import { getToolByKey } from "~/server/data/tools";
+import { useI18n } from "~/composables/i18n";
+
+const { t } = useI18n();
+
+const TOOL_KEY = "colorPaletteGenerator";
+const toolData = getToolByKey(TOOL_KEY);
+const toolBadges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
 definePageMeta({
   alias: [
     "/pt-br/color-palette-generator",

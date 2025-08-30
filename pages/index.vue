@@ -2,7 +2,7 @@
   <div>
     <HeroSection :tools-total-display="toolsTotalDisplay" />
 
-    <section aria-labelledby="cats">
+    <section aria-labelledby="cats" class="section-categories">
       <div class="container">
         <h2 id="cats">{{ t("sections.categories.title") }}</h2>
         <p class="helper">{{ t("sections.categories.helper") }}</p>
@@ -23,28 +23,29 @@
       </div>
     </section>
 
-    <section aria-labelledby="featured">
+    <section aria-labelledby="featured" class="section-featured">
       <div class="container">
-        <h2 id="featured">{{ t("sections.featured.title") }}</h2>
-        <ClientOnly>
-          <div class="grid mt-16">
-            <ToolCard
-              v-for="tool in famousTools"
-              :key="tool.path"
-              :title="tool.title"
-              :description="tool.description"
-              :category="tool.category"
-              :to="tool.path"
-              :badge="tool.badge"
-              :badge-label-override="tool.badgeLabel"
-            />
-          </div>
-          <template #fallback>
-            <div class="grid mt-16">
-              <div v-for="n in 6" :key="n" class="card skeleton-card" />
-            </div>
-          </template>
-        </ClientOnly>
+        <div class="section-header">
+          <h2 id="featured">{{ t("sections.featured.title") }}</h2>
+          <UiButton variant="outline" :to="withLocale('/all-tools')">
+            {{ t("actions.viewAll") }}
+            <template #iconRight>
+              <ArrowRight :size="16" />
+            </template>
+          </UiButton>
+        </div>
+        <div class="grid mt-16">
+          <ToolCard
+            v-for="tool in famousTools"
+            :key="tool.path"
+            :title="tool.title"
+            :description="tool.description"
+            :category="tool.category"
+            :to="tool.path"
+            :badge="tool.badge"
+            :badge-label-override="tool.badgeLabel"
+          />
+        </div>
       </div>
     </section>
 
@@ -55,26 +56,26 @@
 <script setup lang="ts">
 import { computed, ref, type Component } from "vue";
 import { useRoute } from "#app";
-import { ArrowLeftRight, Zap, Globe } from "lucide-vue-next";
+import {
+  ArrowLeftRight,
+  Zap,
+  Globe,
+  ArrowRight,
+  FileText,
+} from "lucide-vue-next";
+import UiButton from "~/components/UI/Button.vue";
 import CategoryCard from "~/components/CategoryCard.vue";
 import ToolCard from "~/components/ToolCard.vue";
 import { useI18n } from "~/composables/i18n";
-import HeroSection from "~/components/HeroSection.vue";
+import HeroSection from "~/components/pages/HeroSection.vue";
 import FeaturesSection from "~/components/FeaturesSection.vue";
 definePageMeta({ alias: ["/pt-br", "/en", "/es"] });
 
 const route = useRoute();
 const q = ref(typeof route.query.q === "string" ? route.query.q : "");
-const { t, withLocale: _withLocale } = useI18n();
+const { t, withLocale } = useI18n();
 
-const categoryLabel = (key: string) =>
-  key === "conversores"
-    ? t("nav.converters")
-    : key === "geradores"
-      ? t("nav.generators")
-      : key === "ferramentas-web"
-        ? t("nav.webTools")
-        : key;
+const categoryLabel = (key: string) => t(`nav.${key}`);
 
 const { data: registry } = await useFetch("/api/tools");
 const toolsTotal = computed(
@@ -85,15 +86,13 @@ const toolsTotalDisplay = computed(
 );
 
 const allTools = computed(() => {
-  const loc = (useI18n().locale.value as string) || "en";
   const items =
     (registry.value as Array<{
-      title?: Record<string, string>;
-      description?: Record<string, string>;
+      key: string;
       category: string;
       path: string;
       keywords?: string[];
-      badges?: Array<{ type?: string; title?: Record<string, string> }>;
+      badges?: Array<{ type?: string; label?: string }>;
       famous?: boolean;
     }> | null) || [];
   return items.map((it) => {
@@ -105,54 +104,49 @@ const allTools = computed(() => {
           ? "new"
           : null;
     return {
-      title: it.title?.[loc] || it.title?.en || "",
-      description: it.description?.[loc] || it.description?.en || "",
+      title: t(`tools.${it.key}.title`),
+      description: t(`tools.${it.key}.description`),
       category: categoryLabel(it.category),
       rawCategory: it.category,
       path: it.path,
       keywords: it.keywords || [],
-      badge: badgeType,
-      badgeLabel: badge?.title?.[loc] || null,
+      badge: badgeType as "popular" | "new" | null,
+      badgeLabel: badge?.label ? t(`badges.${badge.label}`) : null,
       famous: Boolean(it.famous || badgeType === "popular"),
     };
   });
 });
 
 const categories = computed(() => {
-  const loc = (useI18n().locale.value as string) || "en";
   const items =
     (registry.value as Array<{
+      key: string;
       category: string;
-      title?: Record<string, string>;
     }> | null) || [];
-  const groups: Record<
-    string,
-    Array<{ category: string; title?: Record<string, string> }>
-  > = {};
+  const groups: Record<string, Array<{ key: string; category: string }>> = {};
   for (const it of items) {
     const key = it.category;
     if (!groups[key]) groups[key] = [];
     groups[key].push(it);
   }
-  const order = ["conversores", "geradores", "ferramentas-web"];
   const iconMap: Record<string, Component> = {
-    conversores: ArrowLeftRight,
-    geradores: Zap,
-    "ferramentas-web": Globe,
+    converters: ArrowLeftRight,
+    generators: Zap,
+    "web-tools": Globe,
+    documentation: FileText,
   };
   const variantMap: Record<string, "blue" | "green" | "yellow"> = {
-    conversores: "blue",
-    geradores: "green",
-    "ferramentas-web": "yellow",
+    converters: "blue",
+    generators: "green",
+    "web-tools": "yellow",
+    documentation: "blue",
   };
 
-  return order
+  return Object.keys(groups)
     .filter((k) => groups[k] && groups[k].length > 0)
     .map((k) => {
       const tools = groups[k];
-      const tags = tools
-        .slice(0, 3)
-        .map((it) => it.title?.[loc] || it.title?.en || "");
+      const tags = tools.slice(0, 3).map((it) => t(`tools.${it.key}.title`));
       const count = tools.length;
       const moreCount = Math.max(0, count - 3);
       const to = `/${k}`;
@@ -167,7 +161,8 @@ const categories = computed(() => {
         variant: variantMap[k] || "blue",
         icon: iconMap[k] || ArrowLeftRight,
       };
-    });
+    })
+    .sort((a, b) => b.count - a.count);
 });
 
 const visibleTools = computed(() => {
@@ -184,3 +179,76 @@ const visibleTools = computed(() => {
 
 const famousTools = computed(() => visibleTools.value.filter((t) => t.famous));
 </script>
+
+<style scoped>
+section[aria-labelledby] {
+  padding: 40px 0;
+}
+
+@media (min-width: 1024px) {
+  section[aria-labelledby] {
+    padding: 48px 0;
+  }
+}
+
+.section-categories {
+  background: var(--gradient-subtle);
+}
+
+.section-featured {
+  background: var(--surface);
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.section-header h2 {
+  margin: 0;
+}
+
+section[aria-labelledby] h2 {
+  margin: 0 0 8px;
+  font-size: 1.75rem;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  section[aria-labelledby] h2 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  section[aria-labelledby] h2 {
+    font-size: 2.5rem;
+  }
+}
+
+section[aria-labelledby] .helper {
+  margin: 0;
+  text-align: center;
+  font-size: 1rem;
+  color: hsl(var(--muted-foreground));
+}
+
+@media (min-width: 768px) {
+  section[aria-labelledby] .helper {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+  }
+}
+
+section[aria-labelledby] .grid {
+  margin-top: 40px;
+}
+
+@media (min-width: 1024px) {
+  section[aria-labelledby] .grid {
+    margin-top: 56px;
+  }
+}
+</style>

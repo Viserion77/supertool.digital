@@ -9,9 +9,7 @@
   "features": {
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
-  "runArgs": [
-    "--net=host"
-  ],
+  "runArgs": ["--net=host"],
 
   // Use 'forwardPorts' to make a list of ports inside the container available locally.
   // "forwardPorts": [],

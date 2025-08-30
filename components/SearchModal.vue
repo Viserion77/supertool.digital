@@ -1,17 +1,16 @@
 <template>
   <teleport to="body">
-    <div v-if="open" class="modal-backdrop" @click.self="close">
+    <div v-if="open" class="ui-modal-backdrop" @click.self="close">
       <div
-        class="modal-panel"
+        class="ui-modal-panel modal-panel"
         role="dialog"
         aria-modal="true"
         aria-label="Search"
       >
         <form @submit.prevent>
-          <input
+          <UiInput
             ref="inputRef"
             v-model="query"
-            class="search-input modal-search-input"
             type="search"
             :placeholder="placeholder"
             @input="onType"
@@ -26,6 +25,7 @@
 import { ref, watch, nextTick } from "vue";
 import { navigateTo } from "#app";
 import { useI18n } from "~/composables/i18n";
+import UiInput from "~/components/UI/Input.vue";
 const props = withDefaults(
   defineProps<{ open: boolean; placeholder: string; initial?: string }>(),
   { open: false, placeholder: "Buscar...", initial: "" },
@@ -53,14 +53,16 @@ const onType = () => {
   t = window.setTimeout(() => {
     const l = locale.value;
     const slug =
-      l === "en"
-        ? "/tools"
-        : l === "es"
-          ? "/herramientas"
-          : "/todas-as-ferramentas";
+      l === "en" ? "/tools" : l === "es" ? "/herramientas" : "/ferramentas";
     const q = query.value.trim();
     const search = q ? { q } : {};
     navigateTo({ path: withLocale(slug), query: search }, { replace: true });
   }, 250);
 };
 </script>
+
+<style scoped>
+.modal-panel {
+  width: min(640px, 92vw);
+}
+</style>
