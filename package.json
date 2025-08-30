@@ -3,8 +3,9 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "nuxt build",
-    "generate": "nuxt generate",
+    "build": "npm run sitemap:generate && nuxt build",
+    "generate": "npm run sitemap:generate && nuxt generate",
+    "sitemap:generate": "node scripts/generate-sitemap.js",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "dev": "npm run services:up && npm run wait-for-postgres && npm run migration:up && nuxt dev",
@@ -27,8 +28,10 @@
     "@vercel/analytics": "^1.4.1",
     "@vercel/speed-insights": "^1.1.0",
     "async-retry": "^1.3.3",
+    "lucide-vue-next": "^0.542.0",
     "nuxt": "^3.15.3",
     "pg": "8.11.0",
+    "qrcode": "^1.5.3",
     "vue": "latest",
     "vue-router": "latest"
   },
@@ -48,6 +51,6 @@
     "prettier": "^3.3.3",
     "tsx": "^4.19.2",
     "typescript": "^5.7.2",
-    "vitest": "^2.1.9"
+    "vitest": "^3.2.4"
   }
 }

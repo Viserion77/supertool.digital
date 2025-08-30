@@ -1,0 +1,116 @@
+[
+  {
+    "key": "base64Converter",
+    "category": "converters",
+    "path": "/base64-converter",
+    "famous": true,
+    "badges": [
+      {
+        "type": "popular",
+        "color": "blue",
+        "label": "popular"
+      }
+    ],
+    "keywords": ["base64", "encode", "decode"]
+  },
+  {
+    "key": "qrCodeGenerator",
+    "category": "generators",
+    "path": "/qr-code-generator",
+    "famous": true,
+    "badges": [
+      {
+        "type": "popular",
+        "color": "blue",
+        "label": "popular"
+      }
+    ],
+    "keywords": ["qr", "code"]
+  },
+  {
+    "key": "jwtAnalyzer",
+    "category": "web-tools",
+    "path": "/jwt-analyzer",
+    "famous": true,
+    "badges": [
+      {
+        "type": "popular",
+        "color": "blue",
+        "label": "popular"
+      }
+    ],
+    "keywords": ["jwt", "token", "decode"]
+  },
+  {
+    "key": "jsonFormatter",
+    "category": "web-tools",
+    "path": "/json-formatter",
+    "famous": true,
+    "badges": [
+      {
+        "type": "new",
+        "color": "green",
+        "label": "new"
+      }
+    ],
+    "keywords": ["json", "format", "minify"]
+  },
+  {
+    "key": "colorPaletteGenerator",
+    "category": "generators",
+    "path": "/color-palette-generator",
+    "famous": true,
+    "badges": [
+      {
+        "type": "popular",
+        "color": "blue",
+        "label": "popular"
+      }
+    ],
+    "keywords": ["color", "palette"]
+  },
+  {
+    "key": "jsdoc",
+    "category": "documentation",
+    "path": "/jsdoc",
+    "famous": true,
+    "badges": [
+      {
+        "type": "new",
+        "color": "green",
+        "label": "new"
+      }
+    ],
+    "keywords": ["jsdoc", "docs"]
+  },
+  {
+    "key": "urlEncoder",
+    "category": "converters",
+    "path": "/url-encoder",
+    "famous": true,
+    "badges": [],
+    "keywords": ["url", "encode", "decode", "percent"]
+  },
+  {
+    "key": "passwordGenerator",
+    "category": "generators",
+    "path": "/password-generator",
+    "famous": true,
+    "badges": [],
+    "keywords": ["password", "generator", "security", "random"]
+  },
+  {
+    "key": "hashGenerator",
+    "category": "web-tools",
+    "path": "/hash-generator",
+    "famous": true,
+    "badges": [
+      {
+        "type": "new",
+        "color": "green",
+        "label": "new"
+      }
+    ],
+    "keywords": ["hash", "md5", "sha", "checksum"]
+  }
+]

@@ -1,33 +1,52 @@
 <template>
-  <div class="container">
-    <h1>JSDoc Generator</h1>
-    <p>
-      Welcome to the JSDoc Generator! This tool helps you generate JSDoc
-      comments for your JavaScript objects. Simply enter your object in the left
-      textarea, and the generated JSDoc will appear in the right textarea.
-    </p>
-    <textarea
-      v-model="objectInput"
-      placeholder="Enter object here"
-      class="half-screen"
-    />
-    <textarea
-      v-model="jsdocOutput"
-      placeholder="Generated JSDoc output"
-      class="half-screen"
-    />
-    <button class="big-button" @click="clearInput">
-      <i class="icon-clear" /> Clear Input
-    </button>
-    <button class="big-button" @click="copyOutput">
-      <i class="icon-copy" /> Copy Output
-    </button>
-  </div>
+  <ToolShell
+    :category="toolData?.category || 'documentation'"
+    :tool-key="TOOL_KEY"
+    :badges="toolBadges"
+  >
+    <div class="jsdoc-container">
+      <textarea
+        v-model="objectInput"
+        :placeholder="t('tools.jsdoc.inputPlaceholder')"
+        class="half-screen"
+      />
+      <textarea
+        v-model="jsdocOutput"
+        :placeholder="t('tools.jsdoc.outputPlaceholder')"
+        class="half-screen"
+      />
+      <button class="big-button" @click="clearInput">
+        <i class="icon-clear" /> {{ t("tools.jsdoc.clearInput") }}
+      </button>
+      <button class="big-button" @click="copyOutput">
+        <i class="icon-copy" /> {{ t("tools.jsdoc.copyOutput") }}
+      </button>
+    </div>
+  </ToolShell>
 </template>
 
 <script setup lang="ts">
 import { ref, watch } from "vue";
 import { useHead } from "nuxt/app";
+import ToolShell from "~/components/layout/ToolShell.vue";
+import { getToolByKey } from "~/server/data/tools";
+import { useI18n } from "~/composables/i18n";
+
+const { t } = useI18n();
+
+const TOOL_KEY = "jsdoc";
+const toolData = getToolByKey(TOOL_KEY);
+const toolBadges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
+definePageMeta({ alias: ["/jsdoc", "/pt-br/jsdoc", "/en/jsdoc", "/es/jsdoc"] });
 
 useHead({
   title: "JSDoc Generator - SuperTool",
@@ -136,15 +155,15 @@ const generateJSDoc = () => {
     jsdoc += ` */`;
     jsdocOutput.value = jsdoc;
   } catch {
-    jsdocOutput.value = "Invalid input";
+    jsdocOutput.value = t("tools.jsdoc.invalidInput");
   }
 };
 
 watch(objectInput, generateJSDoc);
 </script>
 
-<style>
-.container {
+<style scoped>
+.jsdoc-container {
   display: flex;
   flex-direction: column;
   align-items: center;
