@@ -1,5 +1,5 @@
 <template>
-  <ToolShell :tool-data="toolData">
+  <ToolShell tool-key="urlEncoder">
     <div class="sidebar-grid">
       <UiCard>
         <template #head>
@@ -54,11 +54,8 @@ import UiButton from "~/components/UI/Button.vue";
 import UiCard from "~/components/UI/Card.vue";
 import ToolShell from "~/components/layout/ToolShell.vue";
 import { useI18n } from "~/composables/i18n";
-import { getToolByKey } from "~/server/data/tools";
 
 const { t } = useI18n();
-
-const toolData = getToolByKey("urlEncoder");
 
 definePageMeta({
   alias: [

@@ -1,13 +1,15 @@
 <template>
   <div class="container">
     <UiBreadcrumbs
-      :category="toolData?.category!"
-      :title="t(`tools.${toolData?.key}.title`)"
+      :category="toolData?.category"
+      :title="t(`tools.${toolData.key}.title`)"
     />
 
     <header class="mb-12">
-      <h1>{{ t(`tools.${toolData?.key}.title`) }}</h1>
-      <p class="helper">{{ t(`tools.${toolData?.key}.description`) }}</p>
+      <h1>{{ t(`tools.${toolData.key}.title`) }}</h1>
+      <p class="helper">
+        {{ t(`tools.${toolData.key}.description`) }}
+      </p>
       <div class="badges mt-8">
         <UiBadge
           v-for="badge in badges"
@@ -45,6 +47,9 @@ interface Props {
 const props = defineProps<Props>();
 
 const toolData = getToolByKey(props.toolKey);
+if (!toolData) {
+  throw new Error(`Tool ${props.toolKey} not found`);
+}
 
 const badges =
   toolData?.badges.map((badge) => ({

@@ -1,5 +1,5 @@
 <template>
-  <ToolShell :tool-data="toolData">
+  <ToolShell tool-key="qrCodeGenerator">
     <div class="sidebar-grid">
       <UiCard :title="t('tools.qrCodeGenerator.input')">
         <div class="field">
@@ -105,12 +105,10 @@ import { useHead } from "nuxt/app";
 import UiButton from "~/components/UI/Button.vue";
 import UiCard from "~/components/UI/Card.vue";
 import ToolShell from "~/components/layout/ToolShell.vue";
-import { getToolByKey } from "~/server/data/tools";
 import { useI18n } from "~/composables/i18n";
 
 const { t } = useI18n();
 
-const toolData = getToolByKey("qrCodeGenerator");
 definePageMeta({
   alias: [
     "/qr-code-generator",
