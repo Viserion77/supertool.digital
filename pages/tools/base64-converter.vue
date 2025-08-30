@@ -219,7 +219,8 @@ textarea {
   border: 1px solid var(--border);
   background: var(--card);
   color: var(--text);
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 }
 
 .error {
@@ -228,7 +229,8 @@ textarea {
 }
 
 .code {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
   background: hsl(var(--muted-foreground) / 0.1);
   padding: 8px 12px;
   border-radius: 6px;

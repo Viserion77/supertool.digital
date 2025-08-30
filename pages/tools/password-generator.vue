@@ -163,7 +163,8 @@ function generatePassword() {
 }
 
 .password-output {
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
   font-size: 1.1em;
   width: 100%;
   padding: 12px;
