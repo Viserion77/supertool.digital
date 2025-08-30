@@ -5,7 +5,7 @@
       <div class="card">
         <p class="m-0">
           Precisa de ajuda? Entre em contato pelo e-mail
-          <a href="mailto:vise@seventysete.com">vise@seventysete.com</a>. Nosso
+          <a :href="`mailto:${contactEmail}`">{{ contactEmail }}</a>. Nosso
           suporte é assíncrono e respondemos o quanto antes.
         </p>
       </div>
@@ -21,6 +21,10 @@
 </template>
 
 <script setup lang="ts">
+const {
+  public: { contactEmail },
+} = useRuntimeConfig();
+
 definePageMeta({
   alias: [
     "/pt-br/suporte",

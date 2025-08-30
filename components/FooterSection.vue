@@ -60,7 +60,7 @@
         gratuitas.</small
       >
       <div class="footer-icons">
-        <a href="mailto:vise@seventysete.com" aria-label="Email"
+        <a :href="`mailto:${contactEmail}`" aria-label="Email"
           ><Mail :size="16" aria-hidden="true"
         /></a>
         <a
@@ -81,6 +81,9 @@ import { useI18n } from "~/composables/i18n";
 import { Mail, Github } from "lucide-vue-next";
 import BrandLogo from "~/components/BrandLogo.vue";
 const { t, withLocale } = useI18n();
+const {
+  public: { contactEmail },
+} = useRuntimeConfig();
 const year = new Date().getFullYear();
 
 const { data: reg } = await useFetch("/api/tools");
