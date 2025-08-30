@@ -48,6 +48,22 @@ const badgeLabel = computed(
 </script>
 
 <style scoped>
+.ui-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition-fast);
+}
+
+.ui-card:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
 .tool-card {
   display: grid;
   gap: 10px;
@@ -67,6 +83,8 @@ const badgeLabel = computed(
 
 .title-row h3 {
   margin: 0;
+  font-size: 18px;
+  font-weight: 600;
 }
 
 .meta {
@@ -75,9 +93,37 @@ const badgeLabel = computed(
   gap: 10px;
 }
 
+.ui-helper {
+  color: hsl(var(--muted-foreground));
+  font-size: 14px;
+}
+
+.ui-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.ui-pill.popular {
+  background: hsl(var(--primary) / 0.1);
+  color: hsl(var(--primary));
+  border: 1px solid hsl(var(--primary) / 0.2);
+}
+
+.ui-pill.new {
+  background: hsl(var(--success) / 0.1);
+  color: hsl(var(--success));
+  border: 1px solid hsl(var(--success) / 0.2);
+}
+
 .description {
   margin: 0;
   color: var(--muted);
   min-height: 48px;
+  line-height: 1.5;
 }
 </style>

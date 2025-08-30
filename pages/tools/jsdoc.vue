@@ -167,6 +167,58 @@ watch(objectInput, generateJSDoc);
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
+}
+
+.half-screen {
+  width: 50%;
+  height: 200px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+@media (max-width: 900px) {
+  .half-screen {
+    width: 100%;
+  }
+}
+
+.big-button {
+  font-size: 1.5em;
+  padding: 10px 20px;
+  margin: 10px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  color: var(--text);
+  cursor: pointer;
+  transition: var(--transition-fast);
+}
+
+.big-button:hover {
+  background: hsl(var(--primary) / 0.08);
+}
+
+.icon-copy::before {
+  content: "📋";
+  margin-right: 8px;
+}
+
+.icon-clear::before {
+  content: "🗑️";
+  margin-right: 8px;
+}
+</style>
+
+<style scoped>
+.jsdoc-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .half-screen {

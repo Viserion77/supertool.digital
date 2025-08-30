@@ -210,3 +210,69 @@ const downloadPng = () => {
   a.click();
 };
 </script>
+
+<style scoped>
+.sidebar-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 900px) {
+  .sidebar-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+}
+
+.inline-flex {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.helper {
+  color: hsl(var(--muted-foreground));
+  font-size: 14px;
+}
+
+textarea {
+  width: 100%;
+  min-height: 120px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.qr-preview {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+}
+
+.qr-controls {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.qr-controls input[type="range"] {
+  width: 180px;
+}
+
+.qr-controls input[type="color"] {
+  width: 40px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--card);
+}
+</style>
