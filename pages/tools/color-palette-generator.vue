@@ -1,9 +1,5 @@
 <template>
-  <ToolShell
-    :category="toolData?.category || 'generators'"
-    :tool-key="TOOL_KEY"
-    :badges="toolBadges"
-  >
+  <ToolShell tool-key="colorPaletteGenerator">
     <div class="tool-layout">
       <div class="field">
         <label for="hex">{{
@@ -44,23 +40,10 @@
 import { computed, ref } from "vue";
 import { useHead } from "nuxt/app";
 import ToolShell from "~/components/layout/ToolShell.vue";
-import { getToolByKey } from "~/server/data/tools";
 import { useI18n } from "~/composables/i18n";
 
 const { t } = useI18n();
 
-const TOOL_KEY = "colorPaletteGenerator";
-const toolData = getToolByKey(TOOL_KEY);
-const toolBadges =
-  toolData?.badges.map((badge) => ({
-    label: badge.label,
-    variant:
-      badge.color === "blue"
-        ? ("primary" as const)
-        : badge.color === "green"
-          ? ("success" as const)
-          : ("neutral" as const),
-  })) || [];
 definePageMeta({
   alias: [
     "/pt-br/color-palette-generator",
