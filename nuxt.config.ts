@@ -37,7 +37,7 @@ export default defineNuxtConfig({
   },
   runtimeConfig: {
     public: {
-      contactEmail: "vise@seventysete.com",
+      contactEmail: "core-engine@seventysete.com",
     },
   },
   app: {
