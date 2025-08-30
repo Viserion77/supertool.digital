@@ -1,10 +1,15 @@
 <template>
   <div class="container">
-    <UiBreadcrumbs :category="category" :title="t(`tools.${toolKey}.title`)" />
+    <UiBreadcrumbs
+      :category="toolData?.category"
+      :title="t(`tools.${toolData.key}.title`)"
+    />
 
     <header class="mb-12">
-      <h1>{{ t(`tools.${toolKey}.title`) }}</h1>
-      <p class="helper">{{ t(`tools.${toolKey}.description`) }}</p>
+      <h1>{{ t(`tools.${toolData.key}.title`) }}</h1>
+      <p class="helper">
+        {{ t(`tools.${toolData.key}.description`) }}
+      </p>
       <div class="badges mt-8">
         <UiBadge
           v-for="badge in badges"
@@ -17,34 +22,45 @@
     </header>
 
     <slot />
+
+    <AdSenseBlock
+      :key="$route.fullPath"
+      :ad-slot="toolData?.adSlot || '7434406265'"
+      :min-height="280"
+    />
   </div>
 </template>
 
 <script setup lang="ts">
 import UiBreadcrumbs from "~/components/UI/Breadcrumbs.vue";
 import UiBadge from "~/components/UI/Badge.vue";
+import AdSenseBlock from "~/components/AdSenseBlock.vue";
 import { useI18n } from "~/composables/i18n";
+import { getToolByKey } from "~/server/data/tools";
 
 const { t } = useI18n();
 
-interface Badge {
-  label: string;
-  variant: "neutral" | "primary" | "success" | "warning" | "danger";
-}
-
 interface Props {
-  category: string;
   toolKey: string;
-  badges?: Badge[];
 }
 
-withDefaults(defineProps<Props>(), {
-  badges: () => [
-    { label: "free", variant: "neutral" },
-    { label: "noSignup", variant: "success" },
-    { label: "secure", variant: "warning" },
-  ],
-});
+const props = defineProps<Props>();
+
+const toolData = getToolByKey(props.toolKey);
+if (!toolData) {
+  throw new Error(`Tool ${props.toolKey} not found`);
+}
+
+const badges =
+  toolData?.badges.map((badge) => ({
+    label: badge.label,
+    variant:
+      badge.color === "blue"
+        ? ("primary" as const)
+        : badge.color === "green"
+          ? ("success" as const)
+          : ("neutral" as const),
+  })) || [];
 </script>
 
 <style scoped>

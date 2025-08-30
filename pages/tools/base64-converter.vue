@@ -1,9 +1,5 @@
 <template>
-  <ToolShell
-    :category="toolData?.category || 'converters'"
-    :tool-key="TOOL_KEY"
-    :badges="toolBadges"
-  >
+  <ToolShell tool-key="base64Converter">
     <div class="sidebar-grid">
       <UiCard>
         <template #head>
@@ -90,23 +86,10 @@ import { useHead } from "nuxt/app";
 import UiButton from "~/components/UI/Button.vue";
 import UiCard from "~/components/UI/Card.vue";
 import ToolShell from "~/components/layout/ToolShell.vue";
-import { getToolByKey } from "~/server/data/tools";
 import { useI18n } from "~/composables/i18n";
 
 const { t } = useI18n();
 
-const TOOL_KEY = "base64Converter";
-const toolData = getToolByKey(TOOL_KEY);
-const toolBadges =
-  toolData?.badges.map((badge) => ({
-    label: badge.label,
-    variant:
-      badge.color === "blue"
-        ? ("primary" as const)
-        : badge.color === "green"
-          ? ("success" as const)
-          : ("neutral" as const),
-  })) || [];
 definePageMeta({
   alias: [
     "/base64-converter",

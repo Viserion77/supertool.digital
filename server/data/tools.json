@@ -25,7 +25,8 @@
         "label": "popular"
       }
     ],
-    "keywords": ["qr", "code"]
+    "keywords": ["qr", "code"],
+    "adSlot": "7434406265"
   },
   {
     "key": "jwtAnalyzer",

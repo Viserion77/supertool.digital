@@ -1,9 +1,5 @@
 <template>
-  <ToolShell
-    :category="toolData?.category || 'generators'"
-    :tool-key="TOOL_KEY"
-    :badges="toolBadges"
-  >
+  <ToolShell tool-key="passwordGenerator">
     <div class="sidebar-grid">
       <UiCard>
         <template #head>
@@ -81,22 +77,8 @@ import UiButton from "~/components/UI/Button.vue";
 import UiCard from "~/components/UI/Card.vue";
 import ToolShell from "~/components/layout/ToolShell.vue";
 import { useI18n } from "~/composables/i18n";
-import { getToolByKey } from "~/server/data/tools";
 
 const { t } = useI18n();
-
-const TOOL_KEY = "passwordGenerator";
-const toolData = getToolByKey(TOOL_KEY);
-const toolBadges =
-  toolData?.badges.map((badge) => ({
-    label: badge.label,
-    variant:
-      badge.color === "blue"
-        ? ("primary" as const)
-        : badge.color === "green"
-          ? ("success" as const)
-          : ("neutral" as const),
-  })) || [];
 
 definePageMeta({
   alias: [

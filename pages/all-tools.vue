@@ -86,20 +86,8 @@ const list = computed(() => {
     }> | null) || [];
   return items.map((it) => {
     const badge = it.badges && it.badges[0] ? it.badges[0] : null;
-    const badgeType =
-      badge?.type === "popular"
-        ? "popular"
-        : badge?.type === "new"
-          ? "new"
-          : null;
-    const categoryLabel = (key: string) =>
-      key === "conversores"
-        ? t("nav.converters")
-        : key === "geradores"
-          ? t("nav.generators")
-          : key === "ferramentas-web"
-            ? t("nav.webTools")
-            : key;
+    const badgeType = badge?.type;
+    const categoryLabel = (key: string) => t(`nav.${key}`);
     return {
       title: it.title?.[loc] || it.title?.en || "",
       description: it.description?.[loc] || it.description?.en || "",

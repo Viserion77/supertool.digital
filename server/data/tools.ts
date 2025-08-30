@@ -11,16 +11,13 @@ export interface Tool {
     label: string;
   }>;
   keywords: string[];
+  adSlot?: string;
 }
 
 export const tools: Tool[] = toolsData;
 
-export const getToolByKey = (key: string): Tool | undefined => {
-  return tools.find((tool) => tool.key === key);
-};
-
-export const getToolByPath = (path: string): Tool | undefined => {
-  return tools.find((tool) => tool.path === path);
+export const getToolByKey = (key: string): Tool | null => {
+  return tools.find((tool) => tool.key === key) || null;
 };
 
 export default tools;
