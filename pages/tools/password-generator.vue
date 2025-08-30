@@ -126,7 +126,7 @@ function generatePassword() {
   if (includeSymbols.value) charset += "!@#$%^&*()_+-=[]{}|;:,.<>?";
 
   if (!charset) {
-    password.value = "Selecione pelo menos uma opção";
+    password.value = t("tools.passwordGenerator.selectAtLeastOne");
     return;
   }
 

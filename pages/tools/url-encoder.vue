@@ -39,7 +39,7 @@
           <UiButton variant="primary" @click="convert">{{
             decode ? t("tools.urlEncoder.decode") : t("tools.urlEncoder.encode")
           }}</UiButton>
-          <UiButton @click="clearAll">{{ t("actions.clear") }}</UiButton>
+          <UiButton @click="clearAll">{{ t("actions.clearAll") }}</UiButton>
           <UiButton @click="copy">{{ t("actions.copy") }}</UiButton>
         </template>
 
@@ -103,7 +103,7 @@ function convert() {
       ? decodeURIComponent(input.value)
       : encodeURIComponent(input.value);
   } catch {
-    output.value = "Erro na conversão";
+    output.value = t("common.error");
   }
 }
 </script>

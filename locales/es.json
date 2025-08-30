@@ -156,6 +156,7 @@
   "tools.passwordGenerator.symbols": "Símbolos",
   "tools.passwordGenerator.generate": "Generar",
   "tools.passwordGenerator.result": "Resultado",
+  "tools.passwordGenerator.selectAtLeastOne": "Selecciona al menos una opción",
 
   "tools.urlEncoder.encode": "Codificar a URL",
   "tools.urlEncoder.decode": "Decodificar de URL",
