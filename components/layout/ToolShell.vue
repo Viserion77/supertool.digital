@@ -46,3 +46,26 @@ withDefaults(defineProps<Props>(), {
   ],
 });
 </script>
+
+<style scoped>
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ui-container-padding);
+}
+
+.helper {
+  color: hsl(var(--muted-foreground));
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.badges {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+</style>

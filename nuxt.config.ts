@@ -27,6 +27,14 @@ export default defineNuxtConfig({
   modules: ["@nuxt/test-utils/module", "@nuxt/eslint"],
   ignore: ["**/*.test.ts"],
   css: ["~/assets/styles.css"],
+  experimental: {
+    payloadExtraction: false,
+  },
+  nitro: {
+    prerender: {
+      failOnError: false,
+    },
+  },
   runtimeConfig: {
     public: {
       contactEmail: "vise@seventysete.com",

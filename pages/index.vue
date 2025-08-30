@@ -181,6 +181,37 @@ const famousTools = computed(() => visibleTools.value.filter((t) => t.famous));
 </script>
 
 <style scoped>
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ui-container-padding);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.helper {
+  color: hsl(var(--muted-foreground));
+  font-size: 16px;
+  line-height: 1.6;
+}
+
 section[aria-labelledby] {
   padding: 40px 0;
 }

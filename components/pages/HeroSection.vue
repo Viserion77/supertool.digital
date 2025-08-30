@@ -78,6 +78,13 @@ const scrollToFeatured = () => {
   overflow: hidden;
 }
 
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ui-container-padding);
+}
+
 .hero-inner {
   padding: 72px 24px;
   text-align: left;

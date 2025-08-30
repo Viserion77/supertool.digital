@@ -68,6 +68,22 @@ const goToCategory = () => navigateTo(withLocale(props.to));
 </script>
 
 <style scoped>
+.ui-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow-soft);
+  padding: 20px;
+  text-decoration: none;
+  color: var(--text);
+  transition: var(--transition-fast);
+}
+
+.ui-card:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
 .category-card {
   display: grid;
   gap: 10px;
@@ -95,11 +111,49 @@ const goToCategory = () => navigateTo(withLocale(props.to));
 .text h3 {
   font-size: 18px;
   margin: 0;
+  font-weight: 600;
+}
+
+.ui-helper {
+  color: hsl(var(--muted-foreground));
+  font-size: 14px;
+}
+
+.ui-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+
+.ui-icon.blue {
+  background: var(--gradient-feature-blue);
+  color: var(--color-blue, #3b82f6);
+}
+
+.ui-icon.green {
+  background: var(--gradient-feature-green);
+  color: var(--color-green, #10b981);
+}
+
+.ui-icon.yellow {
+  background: var(--gradient-feature-yellow);
+  color: var(--color-yellow, #f59e0b);
+}
+
+.ui-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 0;
 }
 
 .description {
   margin: 0;
   color: var(--muted);
+  line-height: 1.5;
 }
 
 .tags {
@@ -107,6 +161,17 @@ const goToCategory = () => navigateTo(withLocale(props.to));
   align-items: center;
   gap: var(--ui-gap);
   flex-wrap: wrap;
+}
+
+.ui-chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  background: hsl(var(--muted-foreground) / 0.1);
+  color: hsl(var(--muted-foreground));
 }
 
 .arrow-button {
