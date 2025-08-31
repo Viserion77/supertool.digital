@@ -25,7 +25,7 @@
 
     <AdSenseBlock
       :key="$route.fullPath"
-      :ad-slot="toolData?.adSlot || '7434406265'"
+      :ad-slot="toolData?.adSlot"
       :min-height="280"
     />
   </div>

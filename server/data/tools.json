@@ -11,7 +11,8 @@
         "label": "popular"
       }
     ],
-    "keywords": ["base64", "encode", "decode"]
+    "keywords": ["base64", "encode", "decode"],
+    "adSlot": "2816241071"
   },
   {
     "key": "qrCodeGenerator",
@@ -26,7 +27,7 @@
       }
     ],
     "keywords": ["qr", "code"],
-    "adSlot": "7434406265"
+    "adSlot": "5442404413"
   },
   {
     "key": "jwtAnalyzer",
@@ -89,15 +90,28 @@
     "category": "email-utils",
     "path": "/email-preview",
     "famous": true,
-    "badges": [{ "type": "popular", "color": "blue", "label": "popular" }],
-    "keywords": ["email", "preview", "html", "replace"]
+    "badges": [
+      {
+        "type": "popular",
+        "color": "blue",
+        "label": "popular"
+      }
+    ],
+    "keywords": ["email", "preview", "html", "replace"],
+    "adSlot": "1244155013"
   },
   {
     "key": "emailAnalyzer",
     "category": "email-utils",
     "path": "/email-analyzer",
     "famous": false,
-    "badges": [{ "type": "new", "color": "green", "label": "new" }],
+    "badges": [
+      {
+        "type": "new",
+        "color": "green",
+        "label": "new"
+      }
+    ],
     "keywords": ["email", "analyze", "spam", "bounce"]
   }
 ]
