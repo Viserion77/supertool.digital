@@ -51,7 +51,7 @@ const val = computed({
 html[data-theme="dark"] .select-input {
   background: var(--input-bg-dark) !important;
   color: var(--text);
-  border: none !important;
+  border: 1px solid var(--border) !important;
 }
 
 html[data-theme="dark"] .select-input option {

@@ -32,63 +32,39 @@
     "key": "jwtAnalyzer",
     "category": "web-tools",
     "path": "/jwt-analyzer",
-    "famous": true,
-    "badges": [
-      {
-        "type": "popular",
-        "color": "blue",
-        "label": "popular"
-      }
-    ],
+    "famous": false,
+    "badges": [],
     "keywords": ["jwt", "token", "decode"]
   },
   {
     "key": "jsonFormatter",
-    "category": "web-tools",
+    "category": "converters",
     "path": "/json-formatter",
-    "famous": true,
-    "badges": [
-      {
-        "type": "new",
-        "color": "green",
-        "label": "new"
-      }
-    ],
+    "famous": false,
+    "badges": [],
     "keywords": ["json", "format", "minify"]
   },
   {
     "key": "colorPaletteGenerator",
     "category": "generators",
     "path": "/color-palette-generator",
-    "famous": true,
-    "badges": [
-      {
-        "type": "popular",
-        "color": "blue",
-        "label": "popular"
-      }
-    ],
+    "famous": false,
+    "badges": [],
     "keywords": ["color", "palette"]
   },
   {
     "key": "jsdoc",
     "category": "documentation",
     "path": "/jsdoc",
-    "famous": true,
-    "badges": [
-      {
-        "type": "new",
-        "color": "green",
-        "label": "new"
-      }
-    ],
+    "famous": false,
+    "badges": [],
     "keywords": ["jsdoc", "docs"]
   },
   {
     "key": "urlEncoder",
     "category": "converters",
     "path": "/url-encoder",
-    "famous": true,
+    "famous": false,
     "badges": [],
     "keywords": ["url", "encode", "decode", "percent"]
   },
@@ -96,22 +72,32 @@
     "key": "passwordGenerator",
     "category": "generators",
     "path": "/password-generator",
-    "famous": true,
+    "famous": false,
     "badges": [],
     "keywords": ["password", "generator", "security", "random"]
   },
   {
     "key": "hashGenerator",
-    "category": "web-tools",
+    "category": "generators",
     "path": "/hash-generator",
-    "famous": true,
-    "badges": [
-      {
-        "type": "new",
-        "color": "green",
-        "label": "new"
-      }
-    ],
+    "famous": false,
+    "badges": [],
     "keywords": ["hash", "md5", "sha", "checksum"]
+  },
+  {
+    "key": "emailPreview",
+    "category": "email-utils",
+    "path": "/email-preview",
+    "famous": true,
+    "badges": [{ "type": "popular", "color": "blue", "label": "popular" }],
+    "keywords": ["email", "preview", "html", "replace"]
+  },
+  {
+    "key": "emailAnalyzer",
+    "category": "email-utils",
+    "path": "/email-analyzer",
+    "famous": false,
+    "badges": [{ "type": "new", "color": "green", "label": "new" }],
+    "keywords": ["email", "analyze", "spam", "bounce"]
   }
 ]
