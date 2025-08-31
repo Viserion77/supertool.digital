@@ -98,10 +98,19 @@
                     <span class="badge spam">spam</span>
                   </div>
                   <div class="helper">
-                    {{ t('tools.emailAnalyzer.tooManyExclamationsHelp', { max: maxExclamations }) }}
+                    {{
+                      t("tools.emailAnalyzer.tooManyExclamationsHelp", {
+                        max: maxExclamations,
+                      })
+                    }}
                   </div>
                   <div v-if="open.exclamations" class="details">
-                    {{ t('tools.emailAnalyzer.tooManyExclamationsDetails', { max: maxExclamations, count: exclamationsCount }) }}
+                    {{
+                      t("tools.emailAnalyzer.tooManyExclamationsDetails", {
+                        max: maxExclamations,
+                        count: exclamationsCount,
+                      })
+                    }}
                     <div class="example">
                       <div class="example-title">
                         {{ t("tools.emailAnalyzer.validation") }}
@@ -173,7 +182,11 @@
                     {{ t("tools.emailAnalyzer.imagesAltHelp") }}
                   </div>
                   <div v-if="open.alts" class="details">
-                    {{ t('tools.emailAnalyzer.imagesAltDetails', { count: imgsWithoutAlt }) }}
+                    {{
+                      t("tools.emailAnalyzer.imagesAltDetails", {
+                        count: imgsWithoutAlt,
+                      })
+                    }}
                     <div class="example">
                       <div class="example-title">
                         {{ t("tools.emailAnalyzer.validation") }}
@@ -238,14 +251,20 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    {{ t('tools.emailAnalyzer.spamWordsDetected') }}
+                    {{ t("tools.emailAnalyzer.spamWordsDetected") }}
                     <span class="badge spam">spam</span>
                   </div>
                   <div class="helper">
-                    {{ t('tools.emailAnalyzer.spamWordsHelp') }}
+                    {{ t("tools.emailAnalyzer.spamWordsHelp") }}
                   </div>
                   <div v-if="open.spamWords" class="details">
-                    {{ t('tools.emailAnalyzer.spamWordsDetails', { words: foundSpamWords.join(", ") || t('tools.emailAnalyzer.none') }) }}
+                    {{
+                      t("tools.emailAnalyzer.spamWordsDetails", {
+                        words:
+                          foundSpamWords.join(", ") ||
+                          t("tools.emailAnalyzer.none"),
+                      })
+                    }}
                   </div>
                 </div>
               </li>
@@ -287,14 +306,18 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    {{ t('tools.emailAnalyzer.excessiveCapsLock') }}
+                    {{ t("tools.emailAnalyzer.excessiveCapsLock") }}
                     <span class="badge spam">spam</span>
                   </div>
                   <div class="helper">
-                    {{ t('tools.emailAnalyzer.excessiveCapsLockHelp') }}
+                    {{ t("tools.emailAnalyzer.excessiveCapsLockHelp") }}
                   </div>
                   <div v-if="open.capsLock" class="details">
-                    {{ t('tools.emailAnalyzer.excessiveCapsLockDetails', { percentage: capsLockPercentage }) }}
+                    {{
+                      t("tools.emailAnalyzer.excessiveCapsLockDetails", {
+                        percentage: capsLockPercentage,
+                      })
+                    }}
                   </div>
                 </div>
               </li>
@@ -336,14 +359,18 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    {{ t('tools.emailAnalyzer.emailTooWide') }}
+                    {{ t("tools.emailAnalyzer.emailTooWide") }}
                     <span class="badge bounce">mobile</span>
                   </div>
                   <div class="helper">
-                    {{ t('tools.emailAnalyzer.emailTooWideHelp') }}
+                    {{ t("tools.emailAnalyzer.emailTooWideHelp") }}
                   </div>
                   <div v-if="open.emailWidth" class="details">
-                    {{ t('tools.emailAnalyzer.emailTooWideDetails', { width: emailWidth }) }}
+                    {{
+                      t("tools.emailAnalyzer.emailTooWideDetails", {
+                        width: emailWidth,
+                      })
+                    }}
                   </div>
                 </div>
               </li>
@@ -393,14 +420,20 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    {{ t('tools.emailAnalyzer.unsupportedHtmlTags') }}
+                    {{ t("tools.emailAnalyzer.unsupportedHtmlTags") }}
                     <span class="badge bounce">critical</span>
                   </div>
                   <div class="helper">
-                    {{ t('tools.emailAnalyzer.unsupportedHtmlTagsHelp') }}
+                    {{ t("tools.emailAnalyzer.unsupportedHtmlTagsHelp") }}
                   </div>
                   <div v-if="open.unsupportedTags" class="details">
-                    {{ t('tools.emailAnalyzer.unsupportedHtmlTagsDetails', { tags: unsupportedTags.join(", ") || t('tools.emailAnalyzer.none') }) }}
+                    {{
+                      t("tools.emailAnalyzer.unsupportedHtmlTagsDetails", {
+                        tags:
+                          unsupportedTags.join(", ") ||
+                          t("tools.emailAnalyzer.none"),
+                      })
+                    }}
                   </div>
                 </div>
               </li>
@@ -468,7 +501,14 @@
                     {{ t("tools.emailAnalyzer.unsubscribeMissingHelp") }}
                   </div>
                   <div v-if="open.unsubscribe" class="details">
-                    {{ t('tools.emailAnalyzer.unsubscribeDetails', { keywords: keywords.join(", "), found: foundKeywords.join(", ") || t('tools.emailAnalyzer.none') }) }}
+                    {{
+                      t("tools.emailAnalyzer.unsubscribeDetails", {
+                        keywords: keywords.join(", "),
+                        found:
+                          foundKeywords.join(", ") ||
+                          t("tools.emailAnalyzer.none"),
+                      })
+                    }}
                     <div class="example">
                       <div class="example-title">
                         {{ t("tools.emailAnalyzer.validation") }}

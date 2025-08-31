@@ -439,7 +439,7 @@ function loadExample() {
 <html lang="${locale.value}"><head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>${t('tools.emailPreview.example.title')}</title>
+<title>${t("tools.emailPreview.example.title")}</title>
 <style>
   body { background:#f4f4f4; margin:0; padding:24px; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
   .mail { max-width:640px; margin:0 auto; background:#fff; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; }
@@ -457,13 +457,13 @@ function loadExample() {
       <div class="brand">SuperTool</div>
     </div>
     <div class="content">
-      <h2 style="margin:0 0 12px 0; font:700 24px/1.2 Arial, Helvetica, sans-serif;">${t('tools.emailPreview.example.title')}</h2>
-      <p>${t('tools.emailPreview.example.greeting')}</p>
-      <p>${t('tools.emailPreview.example.message')}</p>
-      <p style="margin:20px 0;"><a class="btn" href=":link">${t('tools.emailPreview.example.button')}</a></p>
-      <p class="muted">${t('tools.emailPreview.example.fallback')}<br/><a href=":link">:link</a></p>
-      <p>${t('tools.emailPreview.example.contact')} <strong>:email</strong>.</p>
-      <p>${t('tools.emailPreview.example.signature')}</p>
+      <h2 style="margin:0 0 12px 0; font:700 24px/1.2 Arial, Helvetica, sans-serif;">${t("tools.emailPreview.example.title")}</h2>
+      <p>${t("tools.emailPreview.example.greeting")}</p>
+      <p>${t("tools.emailPreview.example.message")}</p>
+      <p style="margin:20px 0;"><a class="btn" href=":link">${t("tools.emailPreview.example.button")}</a></p>
+      <p class="muted">${t("tools.emailPreview.example.fallback")}<br/><a href=":link">:link</a></p>
+      <p>${t("tools.emailPreview.example.contact")} <strong>:email</strong>.</p>
+      <p>${t("tools.emailPreview.example.signature")}</p>
     </div>
     <div class="footer">&copy; ${new Date().getFullYear()} SuperTool</div>
   </div>
@@ -471,7 +471,11 @@ function loadExample() {
   variables.value = [
     { id: 1, key: ":name", value: "John Doe" },
     { id: 2, key: ":email", value: "support@example.com" },
-    { id: 3, key: ":link", value: "https://SuperTool.digital/email-preview?t=abc123" },
+    {
+      id: 3,
+      key: ":link",
+      value: "https://SuperTool.digital/email-preview?t=abc123",
+    },
     { id: 4, key: ":primaryColor", value: "#007bff" },
   ];
   ensureBlankRow();
@@ -490,8 +494,6 @@ onMounted(() => {
   }
   ensureBlankRow();
 });
-
-
 </script>
 
 <style scoped>
