@@ -141,6 +141,13 @@
   "tools.emailPreview.loadExample": "Cargar Ejemplo",
   "tools.emailPreview.openAnalyzer": "Analizar HTML",
   "tools.emailPreview.openInNewTab": "Abrir en Nueva Pestaña",
+  "tools.emailPreview.example.title": "Restablecimiento de Contraseña",
+  "tools.emailPreview.example.greeting": "¡Hola, :name!",
+  "tools.emailPreview.example.message": "Recibimos una solicitud para restablecer la contraseña de tu cuenta. Para crear una nueva contraseña, haz clic en el botón de abajo.",
+  "tools.emailPreview.example.button": "Restablecer Contraseña",
+  "tools.emailPreview.example.fallback": "Si el botón no funciona, copia y pega este enlace en tu navegador:",
+  "tools.emailPreview.example.contact": "Si tienes alguna pregunta, contáctanos en",
+  "tools.emailPreview.example.signature": "Saludos cordiales,<br/>Equipo SuperTool",
 
   "tools.jsonFormatter.title": "Formateador JSON",
   "tools.jsonFormatter.description": "Formatea, valida y minifica JSON con resaltado de sintaxis.",

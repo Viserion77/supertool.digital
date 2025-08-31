@@ -150,6 +150,13 @@
   "tools.emailPreview.loadExample": "Carregar Exemplo",
   "tools.emailPreview.openAnalyzer": "Analisar HTML",
   "tools.emailPreview.openInNewTab": "Abrir em Nova Aba",
+  "tools.emailPreview.example.title": "Recuperação de Senha",
+  "tools.emailPreview.example.greeting": "Olá, :name!",
+  "tools.emailPreview.example.message": "Recebemos uma solicitação para redefinir a senha da sua conta. Para criar uma nova senha, clique no botão abaixo.",
+  "tools.emailPreview.example.button": "Redefinir Senha",
+  "tools.emailPreview.example.fallback": "Se o botão não funcionar, copie e cole este link no navegador:",
+  "tools.emailPreview.example.contact": "Em caso de dúvidas, fale com a gente pelo e-mail",
+  "tools.emailPreview.example.signature": "Abraços,<br/>Equipe SuperTool",
 
   "tools.jsonFormatter.title": "JSON Formatter",
   "tools.jsonFormatter.description": "Formatar, validar e minificar seus arquivos JSON com syntax highlighting.",

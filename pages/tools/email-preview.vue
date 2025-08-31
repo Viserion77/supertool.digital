@@ -182,7 +182,7 @@ import { useHead, useRouter } from "nuxt/app";
 import ToolShell from "~/components/layout/ToolShell.vue";
 import { useI18n } from "~/composables/i18n";
 
-const { t } = useI18n();
+const { t, locale } = useI18n();
 const router = useRouter();
 
 definePageMeta({
@@ -435,12 +435,44 @@ function openAnalyzer() {
 }
 
 function loadExample() {
-  html.value = EXAMPLE_HTML;
+  html.value = `<!doctype html>
+<html lang="${locale.value}"><head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>${t('tools.emailPreview.example.title')}</title>
+<style>
+  body { background:#f4f4f4; margin:0; padding:24px; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
+  .mail { max-width:640px; margin:0 auto; background:#fff; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; }
+  .header { padding:24px; border-bottom:1px solid #eee; }
+  .brand { font:600 18px/1.2 Arial, Helvetica, sans-serif; color:#111827; }
+  .content { padding:24px; font:400 16px/1.6 Arial, Helvetica, sans-serif; color:#111827; }
+  .btn { display:inline-block; padding:12px 18px; border-radius:8px; color:#fff; text-decoration:none; background::primaryColor; }
+  .muted { color:#6b7280; font-size:14px; }
+  .footer { padding:16px 24px 24px; color:#6b7280; font:400 13px/1.4 Arial, Helvetica, sans-serif; }
+</style>
+</head>
+<body>
+  <div class="mail">
+    <div class="header">
+      <div class="brand">SuperTool</div>
+    </div>
+    <div class="content">
+      <h2 style="margin:0 0 12px 0; font:700 24px/1.2 Arial, Helvetica, sans-serif;">${t('tools.emailPreview.example.title')}</h2>
+      <p>${t('tools.emailPreview.example.greeting')}</p>
+      <p>${t('tools.emailPreview.example.message')}</p>
+      <p style="margin:20px 0;"><a class="btn" href=":link">${t('tools.emailPreview.example.button')}</a></p>
+      <p class="muted">${t('tools.emailPreview.example.fallback')}<br/><a href=":link">:link</a></p>
+      <p>${t('tools.emailPreview.example.contact')} <strong>:email</strong>.</p>
+      <p>${t('tools.emailPreview.example.signature')}</p>
+    </div>
+    <div class="footer">&copy; ${new Date().getFullYear()} SuperTool</div>
+  </div>
+</body></html>`;
   variables.value = [
-    { id: 1, key: ":name", value: "João Silva" },
-    { id: 2, key: ":email", value: "joao@exemplo.com" },
+    { id: 1, key: ":name", value: "John Doe" },
+    { id: 2, key: ":email", value: "support@example.com" },
     { id: 3, key: ":link", value: "https://example.com/reset?t=abc123" },
-    { id: 4, key: ":primaryColor", value: "orange" },
+    { id: 4, key: ":primaryColor", value: "#007bff" },
   ];
   ensureBlankRow();
   persist();
@@ -459,39 +491,7 @@ onMounted(() => {
   ensureBlankRow();
 });
 
-const EXAMPLE_HTML = `<!doctype html>
-<html lang="pt-BR"><head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Recuperação de Senha</title>
-<style>
-  body { background:#f4f4f4; margin:0; padding:24px; -webkit-text-size-adjust:100%; text-size-adjust:100%; }
-  .mail { max-width:640px; margin:0 auto; background:#fff; border-radius:12px; overflow:hidden; border:1px solid #e5e7eb; }
-  .header { padding:24px; border-bottom:1px solid #eee; }
-  .brand { font:600 18px/1.2 Arial, Helvetica, sans-serif; color:#111827; }
-  .content { padding:24px; font:400 16px/1.6 Arial, Helvetica, sans-serif; color:#111827; }
-  .btn { display:inline-block; padding:12px 18px; border-radius:8px; color:#fff; text-decoration:none; background::primaryColor; }
-  .muted { color:#6b7280; font-size:14px; }
-  .footer { padding:16px 24px 24px; color:#6b7280; font:400 13px/1.4 Arial, Helvetica, sans-serif; }
-</style>
-</head>
-<body>
-  <div class="mail">
-    <div class="header">
-      <div class="brand">SuperTool</div>
-    </div>
-    <div class="content">
-      <h2 style="margin:0 0 12px 0; font:700 24px/1.2 Arial, Helvetica, sans-serif;">Recuperação de Senha</h2>
-      <p>Olá, :name!</p>
-      <p>Recebemos uma solicitação para redefinir a senha da sua conta. Para criar uma nova senha, clique no botão abaixo.</p>
-      <p style="margin:20px 0;"><a class="btn" href=":link">Redefinir Senha</a></p>
-      <p class="muted">Se o botão não funcionar, copie e cole este link no navegador:<br/><a href=":link">:link</a></p>
-      <p>Em caso de dúvidas, fale com a gente pelo e‑mail <strong>:email</strong>.</p>
-      <p>Abraços,<br/>Equipe SuperTool</p>
-    </div>
-    <div class="footer">&copy; ${new Date().getFullYear()} SuperTool</div>
-  </div>
-</body></html>`;
+
 </script>
 
 <style scoped>

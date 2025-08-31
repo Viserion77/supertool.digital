@@ -140,6 +140,13 @@
   "tools.emailPreview.loadExample": "Load Example",
   "tools.emailPreview.openAnalyzer": "Analyze HTML",
   "tools.emailPreview.openInNewTab": "Open in New Tab",
+  "tools.emailPreview.example.title": "Password Reset",
+  "tools.emailPreview.example.greeting": "Hello, :name!",
+  "tools.emailPreview.example.message": "We received a request to reset your account password. To create a new password, click the button below.",
+  "tools.emailPreview.example.button": "Reset Password",
+  "tools.emailPreview.example.fallback": "If the button doesn't work, copy and paste this link in your browser:",
+  "tools.emailPreview.example.contact": "If you have any questions, contact us at",
+  "tools.emailPreview.example.signature": "Best regards,<br/>SuperTool Team",
 
   "tools.jsonFormatter.title": "JSON Formatter",
   "tools.jsonFormatter.description": "Format, validate and minify JSON with syntax highlighting.",
