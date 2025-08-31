@@ -3,9 +3,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "npm run sitemap:generate && nuxt build",
-    "generate": "npm run sitemap:generate && nuxt generate",
+    "build": "npm run sitemap:all && nuxt build",
+    "generate": "npm run sitemap:all && nuxt generate",
     "sitemap:generate": "node scripts/generate-sitemap.js",
+    "sitemap:multilang": "node scripts/generate-sitemap-multilang.js",
+    "sitemap:all": "npm run sitemap:generate && npm run sitemap:multilang",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
     "dev": "npm run services:up && npm run wait-for-postgres && npm run migration:up && nuxt dev",
