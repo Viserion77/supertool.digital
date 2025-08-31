@@ -1,12 +1,12 @@
 <template>
   <section class="container" aria-labelledby="all-tools-title">
-    <h1 id="all-tools-title">Todas as Ferramentas</h1>
+    <h1 id="all-tools-title">{{ t("hero.title_line1") }}</h1>
     <div class="toolbar-row mt-16">
       <UiInput
         ref="qInputRef"
         v-model="q"
         type="search"
-        placeholder="Buscar ferramentas..."
+        :placeholder="t('header.searchPlaceholder')"
         aria-label="Buscar ferramentas"
       />
     </div>
@@ -74,29 +74,33 @@ watch(
 );
 
 const list = computed(() => {
-  const loc = (useI18n().locale.value as string) || "en";
   const items =
     (registry.value as Array<{
-      title?: Record<string, string>;
-      description?: Record<string, string>;
+      key: string;
       category: string;
       path: string;
       keywords?: string[];
-      badges?: Array<{ type?: string; title?: Record<string, string> }>;
+      badges?: Array<{ type?: string; label?: string }>;
     }> | null) || [];
+  const categoryLabel = (key: string) => t(`nav.${key}`);
   return items.map((it) => {
     const badge = it.badges && it.badges[0] ? it.badges[0] : null;
-    const badgeType = badge?.type;
-    const categoryLabel = (key: string) => t(`nav.${key}`);
+    const badgeType =
+      badge?.type === "popular"
+        ? "popular"
+        : badge?.type === "new"
+          ? "new"
+          : null;
+
     return {
-      title: it.title?.[loc] || it.title?.en || "",
-      description: it.description?.[loc] || it.description?.en || "",
+      title: t(`tools.${it.key}.title`),
+      description: t(`tools.${it.key}.description`),
       category: categoryLabel(it.category),
       rawCategory: it.category,
       path: it.path,
       keywords: it.keywords || [],
-      badge: badgeType,
-      badgeLabel: badge?.title?.[loc] || null,
+      badge: badgeType as "popular" | "new" | null,
+      badgeLabel: badge?.label ? t(`badges.${badge.label}`) : null,
     };
   });
 });
@@ -127,3 +131,34 @@ definePageMeta({
   ],
 });
 </script>
+
+<style scoped>
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--ui-container-padding);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.toolbar-row {
+  display: block;
+}
+</style>

@@ -55,7 +55,7 @@
 
 <script setup lang="ts">
 import { computed, ref, type Component } from "vue";
-import { useRoute } from "#app";
+import { useRoute, useHead } from "#app";
 import {
   ArrowLeftRight,
   Zap,
@@ -73,9 +73,47 @@ definePageMeta({ alias: ["/pt-br", "/en", "/es"] });
 
 const route = useRoute();
 const q = ref(typeof route.query.q === "string" ? route.query.q : "");
-const { t, withLocale } = useI18n();
+const { t, withLocale, locale } = useI18n();
 
 const categoryLabel = (key: string) => t(`nav.${key}`);
+
+useHead({
+  title: computed(() => t("meta.home.title")),
+  meta: [
+    {
+      name: "description",
+      content: computed(() => t("meta.home.description")),
+    },
+    { property: "og:title", content: computed(() => t("meta.home.title")) },
+    {
+      property: "og:description",
+      content: computed(() => t("meta.home.description")),
+    },
+    {
+      property: "og:locale",
+      content: computed(() =>
+        locale.value === "pt-br"
+          ? "pt_BR"
+          : locale.value === "es"
+            ? "es_ES"
+            : "en_US",
+      ),
+    },
+    { name: "twitter:title", content: computed(() => t("meta.home.title")) },
+    {
+      name: "twitter:description",
+      content: computed(() => t("meta.home.description")),
+    },
+  ],
+  htmlAttrs: computed(() => ({
+    lang:
+      locale.value === "pt-br"
+        ? "pt-BR"
+        : locale.value === "es"
+          ? "es-ES"
+          : "en",
+  })),
+});
 
 const { data: registry } = await useFetch("/api/tools");
 const toolsTotal = computed(
