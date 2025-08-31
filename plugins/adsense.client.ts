@@ -8,7 +8,7 @@ export default defineNuxtPlugin(() => {
   s.id = ID;
   s.async = true;
   s.src =
-    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1408597872690380";
+    "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7427499965173279";
   s.crossOrigin = "anonymous";
   document.head.appendChild(s);
 });
