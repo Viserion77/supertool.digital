@@ -98,12 +98,10 @@
                     <span class="badge spam">spam</span>
                   </div>
                   <div class="helper">
-                    Reduza o uso de pontos de exclamação para no máximo
-                    {{ maxExclamations }} por e-mail.
+                    {{ t('tools.emailAnalyzer.tooManyExclamationsHelp', { max: maxExclamations }) }}
                   </div>
                   <div v-if="open.exclamations" class="details">
-                    Regra: máximo de {{ maxExclamations }} '!' por e-mail.
-                    Contagem atual: {{ exclamationsCount }}.
+                    {{ t('tools.emailAnalyzer.tooManyExclamationsDetails', { max: maxExclamations, count: exclamationsCount }) }}
                     <div class="example">
                       <div class="example-title">
                         {{ t("tools.emailAnalyzer.validation") }}
@@ -175,8 +173,7 @@
                     {{ t("tools.emailAnalyzer.imagesAltHelp") }}
                   </div>
                   <div v-if="open.alts" class="details">
-                    Regra: toda &lt;img&gt; deve ter atributo alt não vazio.
-                    Imagens sem alt: {{ imgsWithoutAlt }}.
+                    {{ t('tools.emailAnalyzer.imagesAltDetails', { count: imgsWithoutAlt }) }}
                     <div class="example">
                       <div class="example-title">
                         {{ t("tools.emailAnalyzer.validation") }}
@@ -241,14 +238,14 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    Spam Words Detected
+                    {{ t('tools.emailAnalyzer.spamWordsDetected') }}
                     <span class="badge spam">spam</span>
                   </div>
                   <div class="helper">
-                    Avoid using words that trigger spam filters.
+                    {{ t('tools.emailAnalyzer.spamWordsHelp') }}
                   </div>
                   <div v-if="open.spamWords" class="details">
-                    Found words: {{ foundSpamWords.join(", ") || "none" }}
+                    {{ t('tools.emailAnalyzer.spamWordsDetails', { words: foundSpamWords.join(", ") || t('tools.emailAnalyzer.none') }) }}
                   </div>
                 </div>
               </li>
@@ -290,14 +287,14 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    Excessive CAPS LOCK
+                    {{ t('tools.emailAnalyzer.excessiveCapsLock') }}
                     <span class="badge spam">spam</span>
                   </div>
                   <div class="helper">
-                    Keep uppercase text under 30% to avoid spam filters.
+                    {{ t('tools.emailAnalyzer.excessiveCapsLockHelp') }}
                   </div>
                   <div v-if="open.capsLock" class="details">
-                    Current: {{ capsLockPercentage }}% uppercase text
+                    {{ t('tools.emailAnalyzer.excessiveCapsLockDetails', { percentage: capsLockPercentage }) }}
                   </div>
                 </div>
               </li>
@@ -339,14 +336,14 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    Email Too Wide
+                    {{ t('tools.emailAnalyzer.emailTooWide') }}
                     <span class="badge bounce">mobile</span>
                   </div>
                   <div class="helper">
-                    Keep email width under 600px for mobile compatibility.
+                    {{ t('tools.emailAnalyzer.emailTooWideHelp') }}
                   </div>
                   <div v-if="open.emailWidth" class="details">
-                    Current width: {{ emailWidth }}px (recommended: ≤600px)
+                    {{ t('tools.emailAnalyzer.emailTooWideDetails', { width: emailWidth }) }}
                   </div>
                 </div>
               </li>
@@ -396,14 +393,14 @@
                 </div>
                 <div class="content">
                   <div class="label">
-                    Unsupported HTML Tags
+                    {{ t('tools.emailAnalyzer.unsupportedHtmlTags') }}
                     <span class="badge bounce">critical</span>
                   </div>
                   <div class="helper">
-                    Remove tags that don't work in email clients.
+                    {{ t('tools.emailAnalyzer.unsupportedHtmlTagsHelp') }}
                   </div>
                   <div v-if="open.unsupportedTags" class="details">
-                    Found tags: {{ unsupportedTags.join(", ") || "none" }}
+                    {{ t('tools.emailAnalyzer.unsupportedHtmlTagsDetails', { tags: unsupportedTags.join(", ") || t('tools.emailAnalyzer.none') }) }}
                   </div>
                 </div>
               </li>
@@ -471,9 +468,7 @@
                     {{ t("tools.emailAnalyzer.unsubscribeMissingHelp") }}
                   </div>
                   <div v-if="open.unsubscribe" class="details">
-                    Regra: deve existir link de descadastro. Palavras-chave:
-                    {{ keywords.join(", ") }}. Encontrado:
-                    {{ foundKeywords.join(", ") || "nenhum" }}.
+                    {{ t('tools.emailAnalyzer.unsubscribeDetails', { keywords: keywords.join(", "), found: foundKeywords.join(", ") || t('tools.emailAnalyzer.none') }) }}
                     <div class="example">
                       <div class="example-title">
                         {{ t("tools.emailAnalyzer.validation") }}

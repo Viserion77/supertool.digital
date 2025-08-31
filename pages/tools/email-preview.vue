@@ -471,7 +471,7 @@ function loadExample() {
   variables.value = [
     { id: 1, key: ":name", value: "John Doe" },
     { id: 2, key: ":email", value: "support@example.com" },
-    { id: 3, key: ":link", value: "https://example.com/reset?t=abc123" },
+    { id: 3, key: ":link", value: "https://SuperTool.digital/email-preview?t=abc123" },
     { id: 4, key: ":primaryColor", value: "#007bff" },
   ];
   ensureBlankRow();
