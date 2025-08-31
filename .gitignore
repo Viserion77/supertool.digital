@@ -24,4 +24,4 @@ logs
 !.env.example
 
 # Generated files
-public/sitemap.xml
+public/sitemap*.xml
